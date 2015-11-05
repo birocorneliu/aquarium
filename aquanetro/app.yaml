@@ -1,0 +1,33 @@
+application: aquanetro
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+
+handlers:
+
+- url: /css
+  static_dir: static/css
+
+- url: /js
+  static_dir: static/js
+
+- url: /images
+  static_dir: static/images
+
+- url: /_ah/spi/.*
+  script: main.api
+
+- url: /.*
+  script: main.application
+
+
+# [START libraries]
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+- name: endpoints
+  version: latest

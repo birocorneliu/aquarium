@@ -1,0 +1,4 @@
+cron:
+- description: check fish status hourly
+  url: /check_status
+  schedule: every 24 hours

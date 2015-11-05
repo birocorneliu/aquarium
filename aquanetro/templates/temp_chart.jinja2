@@ -1,0 +1,46 @@
+{% extends 'templates/default.jinja2' %}
+
+{% block head_scripts %}
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1.1', {packages: ['line']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Data (incepe cu {{rows[0].date}})');
+      data.addColumn('number', 'Temperatura');
+
+      data.addRows(
+        [
+        {% for row in rows %}
+        [new Date({{row.date.year}}, {{row.date.month}}, {{row.date.day}},
+                  {{row.date.hour}}, {{row.date.minute}}, {{row.date.second}}),
+        {{row.temp}}],
+        {% endfor %}
+        ]);
+
+      var options = {
+        chart: {
+          subtitle: 'in grade Celsius'
+        },
+        height: 400
+      };
+
+      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+      chart.draw(data, options);
+    }
+  </script>
+  {% endblock %}
+
+ {% block body %}
+    <div class="content homepage" id="menu-1">
+    <div class="container">
+	<div class="row templatemorow">
+        <div id="linechart_material"></div>
+    </div>
+    </div>
+    </div>
+ {% endblock %}

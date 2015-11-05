@@ -1,0 +1,54 @@
+{% extends 'templates/default.jinja2' %}
+
+ {% block body %}
+    <!-- contact start -->
+    <div class="">
+    <div class="container">
+     	<div class="row">
+        	<div class="col-md-4 col-sm-12">
+            	<div class="templatemo_contactmap">
+    			<div id="templatemo_map"></div>
+                <img src="images/templatemo_contactiframe.png" alt="contact map">
+                </div>
+                </div>
+            <div class="col-md-3 col-sm-12 leftalign">
+            	<div class="templatemo_contacttitle">Contact Information</div>
+                <div class="clear"></div>
+                <p>Pasionat de acvatristica :)</p>
+                <div class="templatemo_address">
+                	<ul>
+                	<li class="left fa fa-map-marker"></li>
+                    <li class="right">Iasi, Romania</li>
+                    <li class="clear"></li>
+                    <li class="left fa fa-phone"></li>
+                    <li class="right">0742.622.008</li>
+                    <li class="clear"></li>
+                    <li class="left fa fa-envelope"></li>
+                    <li class="right">corneliu.biro@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-12">
+            	<form role="form">
+              	<div class="templatemo_form">
+                	<input name="fullname" type="text" class="form-control" id="fullname" placeholder="Your Name" maxlength="40">
+              	</div>
+              	<div class="templatemo_form">
+                	<input name="email" type="text" class="form-control" id="email" placeholder="Your Email" maxlength="40">
+              	</div>
+               	<div class="templatemo_form">
+                	<input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" maxlength="40">
+              	</div>
+              	<div class="templatemo_form">
+	            	<textarea name="message" rows="10" class="form-control" id="message" placeholder="Message"></textarea>
+              	</div>
+              	<div class="templatemo_form"><button type="button" class="btn btn-primary">Send Message</button></div>
+            </form>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <!-- contact end -->
+ {% endblock %}

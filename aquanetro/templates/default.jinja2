@@ -1,0 +1,107 @@
+<html>
+<head>
+    <title>Acvariu plantat cu discusi</title>
+    <meta name="keywords" content="" />
+	<meta name="description" content="" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/templatemo_misc.css">
+    <link href="/css/templatemo_style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,600' rel='stylesheet' type='text/css'>
+
+    <script src="/js/jquery-1.10.2.min.js"></script>
+	<script src="/js/jquery.lightbox.js"></script>
+	<script src="/js/templatemo_custom.js"></script>
+    <script>
+    function showhide()
+    {
+    	var div = document.getElementById("newpost");
+		if (div.style.display !== "none")
+		{
+			div.style.display = "none";
+		}
+		else {
+			div.style.display = "block";
+		}
+    }
+  	</script>
+ {% block head_scripts %}{% endblock %}
+</head>
+<body>
+  	<div class="site-header">
+		<div class="main-navigation">
+			<div class="responsive_menu">
+				<ul>
+					<li><a class="show-1 templatemo_home" href="#">Gallery</a></li>
+					<li><a class="show-2 templatemo_page2" href="#">Charts</a></li>
+					<li><a class="show-3 templatemo_page3" href="#">Config</a></li>
+					<li><a class="show-5 templatemo_page5" href="#">Contact</a></li>
+				</ul>
+			</div>
+			<div class="container">
+				<div class="row templatemo_gallerygap">
+					<div class="col-md-12 responsive-menu">
+						<a href="#" class="menu-toggle-btn">
+				            <i class="fa fa-bars"></i>
+				        </a>
+					</div> <!-- /.col-md-12 -->
+                    <div class="col-md-3 col-sm-12">
+                    	<a href="/"><img src="/images/home_logo.png" alt="Home"></a>
+                    </div>
+					<div class="col-md-9 main_menu">
+						<ul>
+							<li><a class="show-1 templatemo_home" href="#">
+                            	<span class="fa fa-camera"></span>
+                                Gallery</a></li>
+							<li><a class="show-2 templatemo_page2" href="#">
+                            	<span class="fa fa-users"></span>
+                          		  Charts</a></li>
+							<li><a class="show-3 templatemo_page3" href="#">
+                            	<span class="fa fa-cogs"></span>
+                            	Config</a></li>
+							<li><a class="show-5 templatemo_page5" href="#">
+                            	<span class="fa fa-envelope"></span>
+                                Contact</a></li>
+						</ul>
+					</div> <!-- /.col-md-12 -->
+				</div> <!-- /.row -->
+			</div> <!-- /.container -->
+		</div> <!-- /.main-navigation -->
+	</div> <!-- /.site-header -->
+    <div id="menu-container">
+
+
+ {% block body %}{% endblock %}
+	<!-- footer start -->
+
+
+    </div>
+    <div class="templatemo_footer">
+    	<div class="container">
+    	<div class="row">
+        	<div class="col-md-9 col-sm-12">
+            	<span>AquaNet</span>
+            </div>
+            <div class="col-md-3 col-sm-12 templatemo_rfooter">
+            	  <a href="https://www.facebook.com/birocorneliu">
+                 	<div class="hex_footer">
+					<span class="fa fa-facebook"></span>
+					</div>
+                  </a>
+                  <a href="https://www.linkedin.com/in/corneliubiro">
+                 	<div class="hex_footer">
+					 <span class="fa fa-linkedin"></span>
+					</div>
+                 </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- footer end -->
+ {% block footer_scripts %}{% endblock %}
+</body>
+</html>
