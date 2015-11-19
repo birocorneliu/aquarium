@@ -19,3 +19,28 @@ class FishConfig(ndb.Model):
     emails = ndb.StringProperty(repeated=True)
 
 
+
+###############################################################################
+class Lights(ndb.Model):
+
+    name = ndb.StringProperty(required=True)
+    power = ndb.IntegerProperty(required=True)
+
+
+
+###############################################################################
+class LightsConfig(ndb.Model):
+
+    name = ndb.ReferenceProperty(Lights)
+    start = ndb.DateTimeProperty()
+    finish = ndb.DateTimeProperty()
+
+
+
+###############################################################################
+class CO2Config(ndb.Model):
+
+    start = ndb.DateTimeProperty()
+    finish = ndb.DateTimeProperty()
+
+

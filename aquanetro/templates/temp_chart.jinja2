@@ -3,34 +3,52 @@
 {% block head_scripts %}
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
-    google.load('visualization', '1.1', {packages: ['line']});
+    google.load('visualization', '1.1', {packages: ['corechart']});
     google.setOnLoadCallback(drawChart);
 
     function drawChart() {
 
-      var data = new google.visualization.DataTable();
-      data.addColumn('date', 'Data (incepe cu {{rows[0].date}})');
-      data.addColumn('number', 'Temperatura');
-
-      data.addRows(
-        [
-        {% for row in rows %}
-        [new Date({{row.date.year}}, {{row.date.month}}, {{row.date.day}},
-                  {{row.date.hour}}, {{row.date.minute}}, {{row.date.second}}),
-        {{row.temp}}],
-        {% endfor %}
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Data');
+        data.addColumn('number', 'Temperatura');
+        data.addRows([
+            {% for row in temps %}
+                [new Date({{row.date.year}}, {{row.date.month}}, {{row.date.day}},
+                          {{row.date.hour}}, {{row.date.minute}}),
+                {{row.temp}}],
+            {% endfor %}
         ]);
 
-      var options = {
-        chart: {
-          subtitle: 'in grade Celsius'
-        },
-        height: 400
-      };
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('date', 'Data');
+        data2.addColumn('number', 'Light Intensity');
+        data2.addColumn('number', 'CO2');
+        data2.addRows([
+            {% for row in watts %}
+                [new Date({{row.date.year}}, {{row.date.month}}, {{row.date.day}},
+                          {{row.date.hour}}, {{row.date.minute}}),
+                {{row.light_intensity}},
+                {{row.co2_stat}}],
+            {% endfor %}
+        ]);
 
-      var chart = new google.charts.Line(document.getElementById('linechart_material'));
 
+        var options = {
+            chart: { subtitle: 'in grade Celsius'},
+            height: 400
+        };
+
+        var options2 = {
+            chart: { subtitle: 'in grade Celsius'},
+            height: 400
+        };
+
+      var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
       chart.draw(data, options);
+
+      var chart2 = new google.visualization.LineChart(document.getElementById('linechart'));
+      chart2.draw(data2, options2);
+
     }
   </script>
   {% endblock %}
@@ -40,6 +58,11 @@
     <div class="container">
 	<div class="row templatemorow">
         <div id="linechart_material"></div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div id="linechart"></div>
     </div>
     </div>
     </div>
