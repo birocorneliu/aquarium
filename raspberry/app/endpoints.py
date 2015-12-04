@@ -1,3 +1,4 @@
+from io import GPIO, pinList, pin
 
 #--------------------------------------------------------------------------------------------------
 def home():
@@ -6,11 +7,13 @@ def home():
 
 #--------------------------------------------------------------------------------------------------
 def open_pin(pin_no):
+    pin("open", pin_no)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_no)
 
 
 #--------------------------------------------------------------------------------------------------
 def close_pin(pin_no):
+    pin("close", pin_no)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_no)
 
 
