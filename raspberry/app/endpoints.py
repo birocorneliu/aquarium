@@ -1,6 +1,8 @@
 import time
-from io import GPIO, pinList, pin
-from lib.helpers import get_statuses, config, get_times
+from app.io import IO
+from app.cron import Cron
+from lib.config import config
+from lib.helpers import get_statuses, get_times
 
 #--------------------------------------------------------------------------------------------------
 def home():
@@ -8,20 +10,22 @@ def home():
 
 
 #--------------------------------------------------------------------------------------------------
-def open_pin(pin_no):
-    pin("open", pin_no)
-    return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_no)
+def open_pin(pin_id):
+    IO.open(pin_id)
+    return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
 
 
 #--------------------------------------------------------------------------------------------------
-def close_pin(pin_no):
-    pin("close", pin_no)
-    return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_no)
+def close_pin(pin_id):
+    IO.close(pin_id)
+    return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
 
 
 #--------------------------------------------------------------------------------------------------
 def set_times_to_cron():
-    return str(get_times())
+    times = Cron.set_times()
+    return str(times)
+
 
 #--------------------------------------------------------------------------------------------------
 def temperature():
@@ -34,39 +38,15 @@ def temperature_save():
 
 
 #--------------------------------------------------------------------------------------------------
-def doser(resource, quantity):
-    resources = {
-  	"micro": 	2.3,
-	"macro": 	2.3,
-	"fier": 	4,
-	"twinstar": 	1
-    }
-    seconds = float(quantity) * resources[resource]
-    pin("open", resource)
-    time.sleep(seconds)
-    pin("close", resource)
-
-    return "just dosed '{}' for {} seconds".format(resource, seconds)
+def doser(pin_id, quantity):
+    seconds = IO.temp_open(pin_id, quantity)
+    return "just dosed '{}' for {} seconds".format(pin_id, seconds)
 
 
 #--------------------------------------------------------------------------------------------------
 def reload_pins():
-    pins = {
-	"co2": 1,
-	"led": 2,
-	"865": 3,
-	"830": 4
-    }
     statuses = get_statuses()
-    for id, status in statuses.iteritems():
-	if status:
-	    pin("open", id)
-	else:
-	    pin("close", id)
-
-    return str(statuses) 
-   
-
-
-
+    for pin_id, status in statuses.iteritems():
+        IO.open(pin_id) if status else IO.close(pin_id)
+    return str(statuses)
 

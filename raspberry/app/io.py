@@ -1,38 +1,60 @@
 #!/usr/bin/python
-import RPi.GPIO as GPIO
 import time
-
-GPIO.setmode(GPIO.BCM)
-
-pinList = [27, 3, 4, 17]
-pin_config = {
-    "led": 	 3, 
-    "865":  	 4, 
-    "830": 	17,
-    "co2": 	27, 
-    "pompa": 	 3,
-
-    "micro": 	 3,
-    "macro": 	 4,
-    "fier": 	17,
-    "twinstar": 27,
-}
-
-for i in pinList: 
-    GPIO.setup(i, GPIO.OUT) 
-    GPIO.output(i, GPIO.HIGH)
+from RPi import GPIO
+from lib.config import config
 
 
-def pin(command, pin_id):
-    if command == "open":
-	set = GPIO.LOW
-    elif command == "close":
-	set = GPIO.HIGH
-    else:
-	raise ValueError("Invalid command {} for {}".format(command, pin_id))
+###################################################################################################
+class IO_BASE(object):
+    PINS = config["pins"]
+    RESOURCES = config["resources"]
 
-    if pin_id not in pin_config:
-	raise ValueError("Pin id '{}' is not configured".format(pin_id))
-    #inregistreaza task-ul intr-un json ca sa reluam tot 
-    GPIO.output(pin_config[pin_id], set)
-    time.sleep(0.2)
+
+    #----------------------------------------------------------------------------------------------
+    def __init__(self, GPIO):
+        self.GPIO = GPIO
+        self.GPIO.setmode(GPIO.BCM)
+        self.OPEN_PIN = GPIO.LOW
+        self.CLOSE_PIN = GPIO.HIGH
+
+
+    #----------------------------------------------------------------------------------------------
+    def open(self, pin_id):
+        self.change_pin_status(pin_id, self.OPEN_PIN)
+
+
+    #----------------------------------------------------------------------------------------------
+    def close(self, pin_id):
+        self.change_pin_status(pin_id, self.CLOSE_PIN)
+
+
+    #----------------------------------------------------------------------------------------------
+    def temp_open(self, pin_id, quantity):
+        seconds = float(quantity) * self.RESOURCES.get(pin_id, 0)
+        self.open(pin_id)
+        time.sleep(seconds)
+        self.close(pin_id)
+        return seconds
+
+
+    #----------------------------------------------------------------------------------------------
+    def change_pin_status(self, pin_id, required_status):
+        pin = self.PINS.get(pin_id)
+        if pin is None:
+            return
+
+        if self.status(pin) != required_status:
+            self.GPIO.output(pin, required_status)
+            time.sleep(0.4)
+
+
+    #----------------------------------------------------------------------------------------------
+    def status(self, pin):
+        try:
+            return self.GPIO.input(pin)
+        except:
+            self.GPIO.setup(pin, self.GPIO.OUT)
+            return self.GPIO.input(pin)
+
+
+IO = IO_BASE(GPIO)
