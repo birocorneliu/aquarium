@@ -1,6 +1,6 @@
 import time
 from io import GPIO, pinList, pin
-from lib.helpers import get_statuses, config
+from lib.helpers import get_statuses, config, get_times
 
 #--------------------------------------------------------------------------------------------------
 def home():
@@ -20,10 +20,8 @@ def close_pin(pin_no):
 
 
 #--------------------------------------------------------------------------------------------------
-def dose_pump(pump_id, ml_quantity):
-    return "<h1 style='color:blue'>Hello There, pump_id={}, quantity={}</h1>".format(
-        pump_id, ml_quantity)
-
+def set_times_to_cron():
+    return str(get_times())
 
 #--------------------------------------------------------------------------------------------------
 def temperature():
@@ -62,9 +60,9 @@ def reload_pins():
     statuses = get_statuses()
     for id, status in statuses.iteritems():
 	if status:
-	    pin("open", pins[id])
+	    pin("open", id)
 	else:
-	    pin("close", pins[id])
+	    pin("close", id)
 
     return str(statuses) 
    
