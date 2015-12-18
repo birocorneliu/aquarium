@@ -57,4 +57,11 @@ class IO_BASE(object):
             return self.GPIO.input(pin)
 
 
+    #----------------------------------------------------------------------------------------------
+    def set_pins(self, statuses):
+        for pin_id, status in statuses.iteritems():
+            self.open(pin_id) if status else self.close(pin_id)
+
+
+
 IO = IO_BASE(GPIO)

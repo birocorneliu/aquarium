@@ -9,6 +9,7 @@ ROUTES = (
     (["GET"], "/pin/<pin_id>/open", open_pin),
     (["GET"], "/pin/<pin_id>/close", close_pin),
     (["GET"], "/set_times_to_cron", set_times_to_cron),
+    (["GET"], "/set_procedure/<procedure>", set_procedure),
 )
 
 
