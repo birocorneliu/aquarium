@@ -7,11 +7,13 @@ from .models import FishTemp
 #--------------------------------------------------------------------------------------------------
 def add_temp(request):
     time = datetime.now().replace(microsecond=0)
-    key = ndb.Key(FishTemp, str(time))
+    if hasattr(request, "temperature"):
+        temperature = request.temperature
+    else:
+        temperature = float(request.get("temperature"))
 
-    model = FishTemp(key=key, date=time,
-                     humidity=request.humidity,
-                     temperature=request.temperature)
+    key = ndb.Key(FishTemp, str(time))
+    model = FishTemp(key=key, date=time, temperature=temperature)
     model.put()
 
     return model

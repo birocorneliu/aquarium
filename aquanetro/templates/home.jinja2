@@ -1,5 +1,22 @@
 {% extends 'templates/default.jinja2' %}
 
+{% block head_scripts %}
+    <script>
+    function showhide()
+    {
+    	var div = document.getElementById("newpost");
+		if (div.style.display !== "none")
+		{
+			div.style.display = "none";
+		}
+		else {
+			div.style.display = "block";
+		}
+    }
+  	</script>
+{% endblock %}
+
+
  {% block body %}
 
     <!-- gallery start -->

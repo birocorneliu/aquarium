@@ -64,6 +64,9 @@ class Charts(webapp2.RequestHandler):
                 hour += 1
                 minute = 0
 
+        #temps = db_calls.get_temps()
+        #temps = [{"date": temp.date, "temp": temp.date} for temp in temps]
+
         light_intensity = 0
         lights = [
             [30, {"on": [ 7, 00], "off": [ 7, 20]}],
@@ -128,6 +131,15 @@ class Contact(webapp2.RequestHandler):
         self.response.write(template.render({}))
 
 
+###################################################################################################
+class Commands(webapp2.RequestHandler):
+
+    #----------------------------------------------------------------------------------------------
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('templates/commands.jinja2')
+        self.response.write(template.render({}))
+
+
 
 ###################################################################################################
 class Config(webapp2.RequestHandler):
@@ -136,12 +148,6 @@ class Config(webapp2.RequestHandler):
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('templates/config.jinja2')
         self.response.write(template.render({}))
-
-
-    #----------------------------------------------------------------------------------------------
-    def put(self):
-        pass
-
 
 
 
@@ -160,6 +166,24 @@ class CheckFishStatus(webapp2.RequestHandler):
                 mail.send_mail(sender_address, user_address, subject, message)
 
 
+###################################################################################################
+class Temperature(webapp2.RequestHandler):
+
+    #----------------------------------------------------------------------------------------------
+    def get(self):
+        models = db_calls.get_temps()
+        items = [presenter.copyTempPresenter(model) for model in models]
+        self.response.write({"items": items})
+
+
+    #----------------------------------------------------------------------------------------------
+    def post(self):
+        model = db_calls.add_temp(self.request)
+
+        self.response.write({
+            "date": model.date,
+            "temperature": model.temperature
+        })
 
 
 @endpoints.api(name='FishAPI', version='v1', description="Fishy app")

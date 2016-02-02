@@ -14,6 +14,10 @@ jQuery(document).ready(function($){
         location.href = "/config";
 	});
 
+	$(".main_menu a.templatemo_page4, .responsive_menu a.templatemo_page4").click(function(){
+        location.href = "/commands";
+	});
+
 	$(".main_menu a.templatemo_page5, .responsive_menu a.templatemo_page5").click(function(){
         location.href = "/contact";
 	});

@@ -5,7 +5,6 @@ from protorpc import messages
 class TempPresenter(messages.Message):
 
     temperature = messages.FloatField(1)
-    humidity = messages.FloatField(2)
     date = messages.StringField(3)
 
 

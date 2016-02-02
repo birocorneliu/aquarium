@@ -7,8 +7,10 @@ application = webapp2.WSGIApplication([
     ('/', handlers.MainPage),
     ('/charts', handlers.Charts),
     ('/contact', handlers.Contact),
+    ('/commands', handlers.Commands),
     ('/config', handlers.Config),
     ('/check_status', handlers.CheckFishStatus),
+    ('/temperature', handlers.Temperature),
 ], debug=True)
 
 

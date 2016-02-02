@@ -5,7 +5,6 @@ from google.appengine.ext import ndb
 class FishTemp(ndb.Model):
 
     date = ndb.DateTimeProperty(indexed=True)
-    humidity = ndb.FloatProperty()
     temperature = ndb.FloatProperty()
 
 
@@ -31,7 +30,7 @@ class Lights(ndb.Model):
 ###############################################################################
 class LightsConfig(ndb.Model):
 
-    name = ndb.ReferenceProperty(Lights)
+    name = ndb.StringProperty()
     start = ndb.DateTimeProperty()
     finish = ndb.DateTimeProperty()
 
