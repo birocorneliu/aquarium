@@ -16,5 +16,5 @@ ROUTES = (
 from app.cron import Cron
 
 #Set CronTab
-Cron.clean_cron()
-Cron.set_times()
+#Cron.clean_cron()
+#Cron.set_times()

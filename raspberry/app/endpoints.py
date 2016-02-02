@@ -12,12 +12,14 @@ def home():
 
 #-------------------------------------------------------------------------------------------------
 def open_pin(pin_id):
+    obj = TempCommands.add_entry({pin_id: True})
     IO.open(pin_id)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
 
 
 #-------------------------------------------------------------------------------------------------
 def close_pin(pin_id):
+    obj = TempCommands.add_entry({pin_id: False})
     IO.close(pin_id)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
 
@@ -62,9 +64,13 @@ def set_procedure(procedure):
     if procedure == "lights_on":
         statuses = {"865": True, "830": True}
     elif procedure == "lights_off":
-        statuses = {"865": False, "830": False}
-    elif procedure == "clear_all":
+        statuses = {"865": False, "830": False, "led": False}
+    elif procedure == "movie":
+        statuses = {"865": False, "830": False, "led": True}
+    elif procedure == "reset":
         TempCommands.clear_all()
+        statuses = get_statuses()
+
 
     obj = TempCommands.add_entry(statuses)
     IO.set_pins(statuses)
