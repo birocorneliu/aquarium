@@ -1,6 +1,10 @@
 import time
+import requests
+from flask import request
+
 from app.io import IO
 from app.cron import Cron
+from app.temperature import read_temp
 from lib.config import config
 from lib.helpers import get_statuses, get_times
 from lib.db import TempCommands, session
@@ -32,12 +36,20 @@ def set_times_to_cron():
 
 #-------------------------------------------------------------------------------------------------
 def temperature():
-    return "temp is 29.7"
+    if request.method == "GET":
+        return str(read_temp())
+    else:
+        temp = read_temp()
+        data = {"temperature": temp}
+        response = requests.post("http://aquanet.ro/temperature", data=data )
+
+        return response.content
 
 
 #-------------------------------------------------------------------------------------------------
-def temperature_save():
-    return "temp is 29.7"
+def get_temperatures():
+    response = requests.get("http://aquanet.ro/temperature")
+    return response.content
 
 
 #--------------------------------------------------------------------------------------------------

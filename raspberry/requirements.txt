@@ -2,3 +2,4 @@ RPi.GPIO
 flask
 python-crontab
 sqlalchemy
+requests

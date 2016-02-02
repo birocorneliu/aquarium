@@ -14,6 +14,7 @@ class IO_BASE(object):
     def __init__(self, GPIO):
         self.GPIO = GPIO
         self.GPIO.setmode(GPIO.BCM)
+        self.GPIO.setwarnings(False)
         self.OPEN_PIN = GPIO.LOW
         self.CLOSE_PIN = GPIO.HIGH
 
