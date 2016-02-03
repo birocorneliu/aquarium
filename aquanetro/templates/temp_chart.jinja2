@@ -13,9 +13,9 @@
         data.addColumn('number', 'Temperatura');
         data.addRows([
             {% for row in temps %}
-                [new Date({{row.date.year}}, {{row.date.month}}, {{row.date.day}},
+                [new Date({{row.date.year}}, {{row.date.month-1}}, {{row.date.day}},
                           {{row.date.hour}}, {{row.date.minute}}),
-                {{row.temp}}],
+                {{row.temperature}}],
             {% endfor %}
         ]);
 
