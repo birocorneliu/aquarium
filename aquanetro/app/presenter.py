@@ -25,3 +25,20 @@ def copyTempPresenter(model):
         setattr(tp, field.name, value)
 
     return tp
+
+
+###################################################################################################
+def dictTempPresenter(obj):
+    return {
+        "date": obj.date,
+        "temperature": obj.temperature
+    }
+
+
+###################################################################################################
+def chartTempPresenter(obj):
+    return {
+        "date": obj.date,
+        "temp": obj.temperature
+    }
+

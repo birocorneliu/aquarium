@@ -19,9 +19,8 @@ def add_temp(request):
     return model
 
 
-
 #--------------------------------------------------------------------------------------------------
-def get_temps(limit=50):
+def get_temps(limit=250):
     query = FishTemp.query()
     #query = query.filter(FishTemp.date < datetime.now().replace(hour=19, minute=0))
     query = query.order(-FishTemp.date)
