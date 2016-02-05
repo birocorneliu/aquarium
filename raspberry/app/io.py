@@ -7,26 +7,34 @@ from lib.config import config
 ###################################################################################################
 class IO_BASE(object):
     PINS = config["pins"]
+    PIN_LIST = config["pin_list"]
+    NI_PINS = config["NI_pins"]
     RESOURCES = config["resources"]
 
 
     #----------------------------------------------------------------------------------------------
     def __init__(self, GPIO):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         self.GPIO = GPIO
-        self.GPIO.setmode(GPIO.BCM)
-        self.GPIO.setwarnings(False)
         self.OPEN_PIN = GPIO.LOW
         self.CLOSE_PIN = GPIO.HIGH
+        self.OPEN_NI_PIN = GPIO.HIGH
+        self.CLOSE_NI_PIN = GPIO.LOW
+        #import pdb;pdb.set_trace()
+        #self.change_pin_status("pompa", self.OPEN_PIN)
 
 
     #----------------------------------------------------------------------------------------------
     def open(self, pin_id):
-        self.change_pin_status(pin_id, self.OPEN_PIN)
+        state =  self.OPEN_NI_PIN if pin_id in self.NI_PINS else self.OPEN_PIN
+        self.change_pin_status(pin_id, state)
 
 
     #----------------------------------------------------------------------------------------------
     def close(self, pin_id):
-        self.change_pin_status(pin_id, self.CLOSE_PIN)
+        state =  self.CLOSE_NI_PIN if pin_id in self.NI_PINS else self.CLOSE_PIN
+        self.change_pin_status(pin_id, state)
 
 
     #----------------------------------------------------------------------------------------------
@@ -46,7 +54,7 @@ class IO_BASE(object):
 
         if self.status(pin) != required_status:
             self.GPIO.output(pin, required_status)
-            time.sleep(0.4)
+            time.sleep(0.6)
 
 
     #----------------------------------------------------------------------------------------------
@@ -62,7 +70,6 @@ class IO_BASE(object):
     def set_pins(self, statuses):
         for pin_id, status in statuses.iteritems():
             self.open(pin_id) if status else self.close(pin_id)
-
 
 
 IO = IO_BASE(GPIO)

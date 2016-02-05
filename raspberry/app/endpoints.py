@@ -16,6 +16,7 @@ def home():
 
 #-------------------------------------------------------------------------------------------------
 def open_pin(pin_id):
+
     obj = TempCommands.add_entry({pin_id: True})
     IO.open(pin_id)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
@@ -79,6 +80,8 @@ def set_procedure(procedure):
         statuses = {"865": False, "830": False, "led": False}
     elif procedure == "movie":
         statuses = {"865": False, "830": False, "led": True}
+    elif procedure == "schimb_apa":
+        statuses = {"865": True, "830": False, "led": True, "pompa": False, "incalzitor": False}
     elif procedure == "reset":
         TempCommands.clear_all()
         statuses = get_statuses()

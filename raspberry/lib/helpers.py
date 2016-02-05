@@ -4,7 +4,7 @@ from lib.config import config
 
 #--------------------------------------------------------------------------------------------------
 def get_statuses():
-    status = {}
+    status = {pin_id: True for pin_id in config["NI_pins"]}
     current = datetime.now().replace(second=0, microsecond=0)
     for light in config["lights"]:
         start =  current.replace(hour=light.on_hour,  minute=light.on_minute)
