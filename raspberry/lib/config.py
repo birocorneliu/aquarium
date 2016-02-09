@@ -31,9 +31,9 @@ config = {
         "supplemental_pin": 8,
     },
     "resources": {
-        "micro": 4.1,
-        "macro": 4.1,
-        "fier": 4.1,
+        "micro": 3.3,
+        "macro": 3.3,
+        "fier": 3.3,
         "twinstar": 1
     },
     "lights": [
@@ -48,7 +48,7 @@ config = {
         Light(**{"id": "led", "on_hour": 17, "on_minute":  0, "off_hour": 18, "off_minute":  0}),
         Light(**{"id": "830", "on_hour": 17, "on_minute": 40, "off_hour": 22, "off_minute":  0}),
         Light(**{"id": "865", "on_hour": 18, "on_minute":  0, "off_hour": 21, "off_minute": 30}),
-        Light(**{"id": "led", "on_hour": 21, "on_minute": 30, "off_hour": 22, "off_minute": 30}),
+        Light(**{"id": "led", "on_hour": 21, "on_minute": 30, "off_hour": 22, "off_minute": 45}),
     ],
 }
 
