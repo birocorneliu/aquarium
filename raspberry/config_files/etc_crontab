@@ -1,0 +1,12 @@
+* * * * *  root     curl 127.0.0.1/reload_pins
+0,15,30,45 * * * * root   curl -X POST 127.0.0.1/temperature
+#0/30 * * * * root  curl 127.0.0.1/doser/twinstar/quantity/30
+
+
+0  6 * * * root     curl 127.0.0.1/doser/micro/quantity/2
+15 6 * * * root     curl 127.0.0.1/doser/macro/quantity/2
+30 6 * * * root     curl 127.0.0.1/doser/fier/quantity/2
+
+0  16 * * * root    curl 127.0.0.1/doser/micro/quantity/2
+15 16 * * * root    curl 127.0.0.1/doser/macro/quantity/2
+30 16 * * * root    curl 127.0.0.1/doser/fier/quantity/2
