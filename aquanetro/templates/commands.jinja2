@@ -7,14 +7,61 @@
     <div class="container">
 	<div class="row templatemorow">
 
-        <a href="http://raspberry.aquanet.ro/set_procedure/movie" type="button" class="btn btn-primary">Movie</a>
-        <a href="http://raspberry.aquanet.ro/set_procedure/lights_on" type="button" class="btn btn-primary">Lights ON</a>
-        <a href="http://raspberry.aquanet.ro/set_procedure/lights_off" type="button" class="btn btn-primary">Lights OFF</a>
+        <a href="http://raspberry.aquanet.ro/set_procedure/movie" type="button" class="btn btn-primary">Movie Time</a>
+        <a href="http://raspberry.aquanet.ro/set_procedure/lights_on" type="button" class="btn btn-primary">Lumini ON</a>
+        <a href="http://raspberry.aquanet.ro/set_procedure/lights_off" type="button" class="btn btn-primary">Lumini OFF</a>
+        <a href="http://raspberry.aquanet.ro/set_procedure/schimb_apa" type="button" class="btn btn-primary">Schimb Apa</a>
         <a href="http://raspberry.aquanet.ro/set_procedure/reset" type="button" class="btn btn-primary">Reset</a>
 
+   <p>
+   Lights
+   <label class="sliderLabel" data-pin="865">
+        <span class="slider">
+            <span class="sliderOn">ON</span>
+            <span class="sliderOff">OFF</span>
+            <span class="sliderBlock"></span>
+        </span>
+    </label>
+    </p>
+    <label class="sliderLabel" data-pin="830">
+        LEDs
+        <span class="slider">
+            <span class="sliderOn">ON</span>
+            <span class="sliderOff">OFF</span>
+            <span class="sliderBlock"></span>
+        </span>
+    </label>
     </div>
     </div>
     </div>
+<script type="text/javascript">
+    function plt(pin_id, status, on_success) {
+      // root.addClass("disable")
+      // if root.hasClass("disable") return false;
+      $.ajax({
+        url: "http://raspberry.aquanet.ro/pin/" + pin_id + "/" + status,
+        success: on_success
+
+      })
+    }
+    function on_error() {
+        console.log("turn red")
+    }
+    $(".sliderBlock").on("click", function() {
+        var root = $(this).closest(".sliderLabel");
+        var checked = root.hasClass("open");
+        var pin_id = root.attr("data-pin");
+        if (checked) {
+            plt(pin_id, "close", function() {
+                root.removeClass("open");
+            })
+        } else {
+            plt(pin_id, "open", function() {
+                 root.addClass("open");
+            })
+        };
+    });
+</script>
  {% endblock %}
 
 

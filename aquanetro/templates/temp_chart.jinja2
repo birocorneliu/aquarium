@@ -6,18 +6,33 @@
     google.load('visualization', '1.1', {packages: ['corechart']});
     google.setOnLoadCallback(drawChart);
 
-    function drawChart() {
 
+    var options = {
+        chart: { subtitle: 'in grade Celsius'},
+        height: 400
+    };
+
+    var options2 = {
+        chart: { subtitle: 'in grade Celsius'},
+        height: 400
+    };
+
+    var initialTemps = [{% for row in temps %}
+            [new Date({{row.date.year}}, {{row.date.month-1}}, {{row.date.day}},
+                      {{row.date.hour}}, {{row.date.minute}}),
+            {{row.temperature}}],
+        {% endfor %}]
+
+    function getChartData(temps) {
         var data = new google.visualization.DataTable();
         data.addColumn('date', 'Data');
         data.addColumn('number', 'Temperatura');
-        data.addRows([
-            {% for row in temps %}
-                [new Date({{row.date.year}}, {{row.date.month-1}}, {{row.date.day}},
-                          {{row.date.hour}}, {{row.date.minute}}),
-                {{row.temperature}}],
-            {% endfor %}
-        ]);
+        data.addRows(temps);
+        return data;
+    }
+
+    function drawChart() {
+        var data = getChartData(initialTemps);
 
         var data2 = new google.visualization.DataTable();
         data2.addColumn('date', 'Data');
@@ -32,22 +47,11 @@
             {% endfor %}
         ]);
 
+        var chart = new google.visualization.LineChart(document.getElementById('temperature_chart'));
+        var chart2 = new google.visualization.LineChart(document.getElementById('linechart'));
 
-        var options = {
-            chart: { subtitle: 'in grade Celsius'},
-            height: 400
-        };
-
-        var options2 = {
-            chart: { subtitle: 'in grade Celsius'},
-            height: 400
-        };
-
-      var chart = new google.visualization.LineChart(document.getElementById('linechart_material'));
-      chart.draw(data, options);
-
-      var chart2 = new google.visualization.LineChart(document.getElementById('linechart'));
-      chart2.draw(data2, options2);
+        chart.draw(data, options);
+        chart2.draw(data2, options2);
 
     }
   </script>
@@ -57,7 +61,14 @@
     <div class="content homepage" id="menu-1">
     <div class="container">
 	<div class="row templatemorow">
-        <div id="linechart_material"></div>
+        <div id="temperature_chart"></div>
+        <div class="linechart_material_controlls">
+            <a class="btn btn-primary last_day" >Last day</a>
+            <a class="btn btn-primary last_3_days" >Last 3 days</a>
+            <a class="btn btn-primary last_week" >Last week</a>
+            <a class="btn btn-primary last_month" >Last month</a>
+            <a class="btn btn-primary last_year" >Last year</a>
+        </div>
         <br/>
         <br/>
         <br/>
@@ -66,4 +77,37 @@
     </div>
     </div>
     </div>
+
+
+  <script type="text/javascript">
+    function get_temps(range) {
+        $.ajax({
+          url: "/api/charts",
+          data: { range: range },
+          success: function(data) {
+            console.log(data)
+            data = JSON.parse(data)
+            console.log(data)
+            var temps = data.temps.map(function(row) {
+                return [new Date(row.date.year, row.date.month-1, row.date.day, row.date.hour, row.date.minute), row.temperature]})
+            var data = getChartData(temps);
+
+            var chart = new google.visualization.LineChart(document.getElementById('temperature_chart'));
+            chart.clearChart();
+            chart.draw(data, options);
+          },
+          error: function() {
+            console.log("not ok");
+          }
+        })
+    };
+
+    $(".last_day").on("click", function () { get_temps(1) });
+    $(".last_3_days").on("click", function () { get_temps(3) });
+    $(".last_week").on("click", function () { get_temps(7) });
+    $(".last_month").on("click", function () { get_temps(30) });
+    $(".last_year").on("click", function () { get_temps(365) });
+
+
+  </script>
  {% endblock %}

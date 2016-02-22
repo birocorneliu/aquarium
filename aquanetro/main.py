@@ -11,6 +11,7 @@ application = webapp2.WSGIApplication([
     ('/config', handlers.Config),
     ('/check_status', handlers.CheckFishStatus),
     ('/temperature', handlers.Temperature),
+    ('/api/charts', handlers.ApiCharts),
 ], debug=True)
 
 

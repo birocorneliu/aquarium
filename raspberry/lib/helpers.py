@@ -1,5 +1,19 @@
+import requests
 from datetime import datetime
+from retrying import retry
+
 from lib.config import config
+from app.temperature import read_temp
+
+
+@retry(stop_max_attempt_number=10, wait_fixed=1000)
+#-------------------------------------------------------------------------------------------------
+def send_temperature():
+    temp = read_temp()
+    data = {"temperature": temp}
+    response = requests.post("http://aquanet.ro/temperature", data=data)
+
+    return response.content
 
 
 #--------------------------------------------------------------------------------------------------

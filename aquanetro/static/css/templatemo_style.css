@@ -1,4 +1,4 @@
-/* 
+/*
 
 Polygon Template
 
@@ -7,9 +7,9 @@ http://www.templatemo.com/tm-400-polygon
 */
 
 html, body {
-	font-family: Tahoma, Arial; 
-	padding: 0px; 
-	margin: 0px; 
+	font-family: Tahoma, Arial;
+	padding: 0px;
+	margin: 0px;
 	color: #e7e7e7;
 	background: #393e42;
 	font-size: 12px;
@@ -54,7 +54,7 @@ h1	{	font-size: 1.5em;
 	padding: 10px 8px;
 	float: left;
 	}
-	
+
 h2	{ font-size: 24px; color: #ffffff; }
 h3 {  text-align: center; font-size: 16px; }
 /*img {
@@ -70,7 +70,7 @@ span.fa	{ width: 100%; text-align: center; }
 .site-header .main-navigation ul {
   padding: 0;
   margin: 0;
-  list-style: none; 
+  list-style: none;
   float: right;
 }
 
@@ -245,7 +245,7 @@ a.menu-toggle-btn {
   width: 26%;
   display: block;
   position: relative;
-  
+
 }
 .hexagon-a a.hlinktop:hover .hexa-a {
   background: #cfb652;
@@ -333,9 +333,9 @@ a.menu-toggle-btn {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-} 
+}
 
-/* main Hexa */ 
+/* main Hexa */
 .hexa {
   width: 100%;
   min-width: 120px;
@@ -394,7 +394,7 @@ a.menu-toggle-btn {
 .hex_footer span.fa{ color: #ffffff; font-size: 16px; line-height: 40px; }
 
 /*------------------------------------------------------
-	Gallery Styles 
+	Gallery Styles
 --------------------------------------------------------*/
 .gallery-item {
   background-color: white;
@@ -454,39 +454,39 @@ a.menu-toggle-btn {
 .templatemo_gallerygap img{ margin-top: 30px; }
 .templatemo_gallerygap span.fa	{ font-size: 22px; margin-bottom: 15px; }
 .templatemo_gallerytop	{ margin-top: 11%; }
-.templatemo_loadmore	{ 
-	margin: 0 auto; 
-	padding: 7px 0px; 
-	background: #b79e41; 
-	margin-top: 15%; 
-	text-align: center; 
-	font-size: 16px; 
-	width: 200px; 
+.templatemo_loadmore	{
+	margin: 0 auto;
+	padding: 7px 0px;
+	background: #b79e41;
+	margin-top: 15%;
+	text-align: center;
+	font-size: 16px;
+	width: 200px;
 	margin-bottom:10%;
 	}
 
-.templatemo_loadmore button{ 
-	border: none; 
-	background: #b79e41; 
-	color: #ffffff; 
+.templatemo_loadmore button{
+	border: none;
+	background: #b79e41;
+	color: #ffffff;
 	text-transform: uppercase;
 	width: 100%;
 	}
-.templatemo_contacttitle	{ 
-	font-size: 16px; 
-	color: #ffffff; }	
-.templatemo_contactmap	{ 
-	width: 332px; 
-	height: 388px; 
+.templatemo_contacttitle	{
+	font-size: 16px;
+	color: #ffffff; }
+.templatemo_contactmap	{
+	width: 332px;
+	height: 388px;
 	margin: 0 auto; }
 
 
-.templatemo_contactmap img{ 
+.templatemo_contactmap img{
 	position: absolute;
 	top: 0px;
 	left: 29px;
 	}
-.templatemo_address	ul{ 
+.templatemo_address	ul{
 	float: left;
 	width: 100%;
 	padding: 0;
@@ -506,29 +506,29 @@ a.menu-toggle-btn {
 .templatemo_address	ul li.clear	{ height: 10px; width: 100%; }
 
 .templatemo_form	{  width: 100%; }
-.templatemo_form input{ 
-	float: left; 
-	height: 34px; 
-	padding: 6px 12px; 
-	border-radius: 0px; 
-	background: #343536; 
-	border: 1px solid #4b5257; 
-	width: 100%;  
+.templatemo_form input{
+	float: left;
+	height: 34px;
+	padding: 6px 12px;
+	border-radius: 0px;
+	background: #343536;
+	border: 1px solid #4b5257;
+	width: 100%;
 	margin-top: 10px;
 	color: #cccccc;
 	}
 .templatemo_form textarea{
-	float: left; 
-	padding: 6px 12px; 
+	float: left;
+	padding: 6px 12px;
 	height: 130px;
-	border-radius: 0px; 
-	background: #343536; 
-	border: 1px solid #4b5257; 
-	margin-top: 10px; 
+	border-radius: 0px;
+	background: #343536;
+	border: 1px solid #4b5257;
+	margin-top: 10px;
 	color: #cccccc;
 }
 .templatemo_form button.btn-primary{
-	float: left; 
+	float: left;
 	width: 100%;
 	line-height: 34px;
 	text-align: center;
@@ -552,12 +552,12 @@ a.menu-toggle-btn {
 .templatemo_footer .hex_footer	{ float: left; margin-right: 5px; height: 40px; }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
+@media only screen
+and (min-device-width : 320px)
 and (max-width : 419px)	{
 	.hex	{ width: 50%; float: left; }
 	.templatemorow	{ margin: 0 5%; }
-	.hexagon2 
+	.hexagon2
 	{
 	position: absolute;
 	width: 110px;
@@ -580,11 +580,11 @@ and (max-width : 419px)	{
 	.blok	{ left: 13%; }
 }
 
-@media (min-width : 420px) 
+@media (min-width : 420px)
 and (max-width : 559px)	{
 	.hex	{ width: 50%; float: left; }
 	.templatemorow	{ margin: 0; }
-	.hexagon2 
+	.hexagon2
 	{
 	position: absolute;
 	width: 150px;
@@ -599,13 +599,13 @@ and (max-width : 559px)	{
 	.templatemo_servicetxt	{ margin-top: 230px; }
 	.templatemo_servicecol2	{ margin-top: 7%; float: left; }
 	.blok	{ left: 22%; }
-	
+
 }
 
 @media(min-width:560px) and (max-width:767px)	{
 	.hex	{ width: 50%; float: left; }
 	.templatemorow	{ margin: 0 10%; }
-	.hexagon2 
+	.hexagon2
 	{
 	position: absolute;
 	width: 200px;
@@ -631,9 +631,9 @@ and (max-width : 559px)	{
 	.templatemo_hexservices	{ width: 100%; margin-top: 5%; float: left; }
 
 }
-@media(min-width:768px) and (max-width: 991px){ 
+@media(min-width:768px) and (max-width: 991px){
 	.templatemorow	{ margin: 0 4%; }
-	.hexagon2 
+	.hexagon2
 	{
 	position: absolute;
 	width: 120px;
@@ -651,15 +651,15 @@ and (max-width : 559px)	{
 	.blok	{ left: 33%; }
 
 	}
-@media(min-width:768px) and (max-width: 860px){ 
+@media(min-width:768px) and (max-width: 860px){
 	.templatemo_gallerytop	{ margin-top: 15%; }
 }
-@media(min-width:861px) and (max-width: 991px){ 
+@media(min-width:861px) and (max-width: 991px){
 	.templatemo_gallerytop	{ margin-top: 14%; }
 }
 @media(min-width:992px){
 	.templatemorow	{ margin: 0 7%; }
-	.hexagon2 
+	.hexagon2
 	{
 	position: absolute;
 	width: 150px;
@@ -687,7 +687,7 @@ and (max-width : 559px)	{
 @media(min-width:1400px) and (max-width:1600px)	{
  	.templatemo_gallerytop	{ margin-top: 14%; }
  }
- 
+
 @media(min-width:1200px){
 	.templatemorow	{ margin: 0px 30px; }
 	.hexagon2 {
@@ -703,11 +703,11 @@ and (max-width : 559px)	{
 	.templatemo_servicerow	{ margin: 30px 30px; }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
 	.site-header .main-navigation ul {
  	 padding: 0;
  	 margin: 0;
-  	list-style: none; 
+  	list-style: none;
   	float: none;
 	}
 
@@ -731,10 +731,10 @@ and (max-width : 559px)	{
     display: none;
   }
   }
-  
+
  @media	(max-width: 991px) {
 	.templatemo_footer div.col-sm-12{ float: left; margin-top: 10px; width: 100%; }
-	
+
  }
 .content { display: none; height: auto; }
 .homepage	{ display: block; }

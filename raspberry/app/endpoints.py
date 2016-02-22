@@ -6,7 +6,7 @@ from app.io import IO
 from app.cron import Cron
 from app.temperature import read_temp
 from lib.config import config
-from lib.helpers import get_statuses, get_times
+from lib.helpers import get_statuses, get_times, send_temperature
 from lib.db import TempCommands, session
 
 #-------------------------------------------------------------------------------------------------
@@ -40,11 +40,7 @@ def temperature():
     if request.method == "GET":
         return str(read_temp())
     else:
-        temp = read_temp()
-        data = {"temperature": temp}
-        response = requests.post("http://aquanet.ro/temperature", data=data )
-
-        return response.content
+        return send_temperature()
 
 
 #-------------------------------------------------------------------------------------------------

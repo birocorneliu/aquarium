@@ -1,5 +1,6 @@
 import os
 import jinja2
+import json
 import endpoints
 import webapp2
 from protorpc import message_types, remote
@@ -48,14 +49,23 @@ class Charts(webapp2.RequestHandler):
     #----------------------------------------------------------------------------------------------
     def get(self):
         template_values = {
-            "temps": db_calls.get_temps(),
+            "temps": db_calls.get_dict_temps(),
             "watts": utils.get_light()
         }
-
-        print template_values["temps"]
         template = JINJA_ENVIRONMENT.get_template('templates/temp_chart.jinja2')
         self.response.write(template.render(template_values))
 
+
+###################################################################################################
+class ApiCharts(webapp2.RequestHandler):
+
+    #----------------------------------------------------------------------------------------------
+    def get(self):
+        days = int(self.request.params.get("range", 3))
+        template_values = {
+            "temps": db_calls.get_dict_temps(days),
+        }
+        self.response.write(json.dumps(template_values))
 
 
 ###################################################################################################
