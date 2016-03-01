@@ -3,9 +3,35 @@ import jinja2
 import json
 import endpoints
 import webapp2
+from webapp2_extras import sessions
 from protorpc import message_types, remote
-from google.appengine.api import mail
+from google.appengine.api import mail, users
 from app import parser, presenter, db_calls, utils
+
+
+
+###################################################################################################
+class BaseHandler(webapp2.RequestHandler):
+
+    #----------------------------------------------------------------------------------------------
+    def dispatch(self):
+        # Get a session store for this request.
+        self.session_store = sessions.get_store(request=self.request)
+
+        try:
+            # Dispatch the request.
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            # Save all sessions.
+            self.session_store.save_sessions(self.response)
+
+
+    @webapp2.cached_property
+    #----------------------------------------------------------------------------------------------
+    def session(self):
+        # Returns a session using the default cookie key.
+        return self.session_store.get_session()
+
 
 
 ###################################################################################################
@@ -16,7 +42,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 
 ###################################################################################################
-class MainPage(webapp2.RequestHandler):
+class MainPage(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
@@ -44,7 +70,7 @@ class MainPage(webapp2.RequestHandler):
 
 
 ###################################################################################################
-class Charts(webapp2.RequestHandler):
+class Charts(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
@@ -57,7 +83,7 @@ class Charts(webapp2.RequestHandler):
 
 
 ###################################################################################################
-class ApiCharts(webapp2.RequestHandler):
+class ApiCharts(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
@@ -69,7 +95,7 @@ class ApiCharts(webapp2.RequestHandler):
 
 
 ###################################################################################################
-class Contact(webapp2.RequestHandler):
+class Contact(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
@@ -78,17 +104,18 @@ class Contact(webapp2.RequestHandler):
 
 
 ###################################################################################################
-class Commands(webapp2.RequestHandler):
+class Commands(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
+        #import pdb; pdb.set_trace()
         template = JINJA_ENVIRONMENT.get_template('templates/commands.jinja2')
         self.response.write(template.render({}))
 
 
 
 ###################################################################################################
-class Config(webapp2.RequestHandler):
+class Config(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
@@ -98,7 +125,7 @@ class Config(webapp2.RequestHandler):
 
 
 ###################################################################################################
-class CheckFishStatus(webapp2.RequestHandler):
+class CheckFishStatus(BaseHandler):
 
     #--------------------------------------------------------------------------
     def get(self):
@@ -112,8 +139,9 @@ class CheckFishStatus(webapp2.RequestHandler):
                 mail.send_mail(sender_address, user_address, subject, message)
 
 
+
 ###################################################################################################
-class Temperature(webapp2.RequestHandler):
+class Temperature(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
@@ -130,6 +158,25 @@ class Temperature(webapp2.RequestHandler):
             "date": model.date,
             "temperature": model.temperature
         })
+
+
+###################################################################################################
+class Connect(BaseHandler):
+
+    #----------------------------------------------------------------------------------------------
+    def get(self):
+        #import pdb;pdb.set_trace()
+        template = JINJA_ENVIRONMENT.get_template('templates/login.jinja2')
+        self.response.write(template.render({}))
+        print self.session
+
+
+    #----------------------------------------------------------------------------------------------
+    def post(self):
+        data = utils.connect_user_through_facebook(self.request.body)
+        self.session.update(data)
+        self.response.write({})
+
 
 
 @endpoints.api(name='FishAPI', version='v1', description="Fishy app")
@@ -155,4 +202,5 @@ class FishAPI(remote.Service):
         items = [presenter.copyTempPresenter(model) for model in models]
 
         return presenter.TempsPresenter(items=items)
+
 

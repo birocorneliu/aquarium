@@ -1,5 +1,9 @@
+import json
+import urllib2
 from datetime import datetime
 
+
+#--------------------------------------------------------------------------------------------------
 def get_light():
 
     light_intensity = 0
@@ -47,3 +51,45 @@ def get_light():
             minute = 0
 
     return watts
+
+
+FACEBOOK_ID = "1566961360262390"
+FACEBOOK_SECRET = "19739dd9f84b9015d46edb0b0ffbcd93"
+
+#Oauth 2 Facebook login
+#--------------------------------------------------------------------------------------------------
+def connect_user_through_facebook(access_token):
+    app_id = FACEBOOK_ID
+    app_secret = FACEBOOK_SECRET
+    url = "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s" % (
+        app_id, app_secret, access_token)
+    result = urllib2.urlopen(url).read()
+
+    # Use token to get user info from API
+    userinfo_url = "https://graph.facebook.com/v2.2/me"
+    # strip expire tag from access token
+    token = result.split("&")[0]
+
+    # Get user picture
+    url = "https://graph.facebook.com/v2.2/me/picture?%s&redirect=0&height=200&width=200" % token
+    result = urllib2.urlopen(url).read()
+    data = json.loads(result)
+    picture = data["data"]["url"]
+
+    #Get user data
+    url = "https://graph.facebook.com/v2.2/me?%s" % token
+    result = urllib2.urlopen(url).read()
+    data = json.loads(result)
+
+    # The token must be stored in the login_session in order to properly logout, let"s strip out the information before the equals sign in our token
+    stored_token = token.split("=")[1]
+
+    # see if user exists
+
+    return {
+        "name": data["name"],
+        "picture": picture,
+        "access_token": stored_token,
+    }
+
+
