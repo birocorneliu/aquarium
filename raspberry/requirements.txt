@@ -1,5 +1,6 @@
 RPi.GPIO
 flask
+flask-cors
 python-crontab
 sqlalchemy
 requests

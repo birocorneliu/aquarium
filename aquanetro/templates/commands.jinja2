@@ -31,10 +31,46 @@
             <span class="sliderBlock"></span>
         </span>
     </label>
+
+
     </div>
     </div>
+
     </div>
+
+    <div class="checkboxes">
+      <label class="checkbox">Som<input type="checkbox" class="ios-switch" /></label>
+      <label class="checkbox">Som<input type="checkbox" class="ios-switch checked" /></label>
+    </div>
+
 <script type="text/javascript">
+    var switches = document.querySelectorAll('input[type="checkbox"].ios-switch');
+    for (var i=0, sw; sw = switches[i++]; ) {
+        var div = document.createElement('div');
+        div.className = 'switch';
+        sw.parentNode.insertBefore(div, sw.nextSibling);
+    }
+
+    function set_command(status) {
+        $.ajax({
+            url: "http://raspberry.aquanet.ro/temperature/" + status,
+        })
+    }
+
+    $(".ios-switch").on("click", function() {
+        var root = $(this)
+        if (root.hasClass("open")) {
+            root.removeClass("open")
+            set_command("close")
+        } else {
+            root.addClass("open")
+            set_command("open")
+        }
+    })
+
+
+
+
     function plt(pin_id, status, on_success) {
       // root.addClass("disable")
       // if root.hasClass("disable") return false;
