@@ -35,24 +35,24 @@
 }
 .sliderOn {
     background: #3269aa;
-    background: -moz-linear-gradient(top,  .3269aa 0%, .82b3f4 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,.3269aa), color-stop(100%,.82b3f4));
-    background: -webkit-linear-gradient(top,  .3269aa 0%,.82b3f4 100%);
-    background: -o-linear-gradient(top,  .3269aa 0%,.82b3f4 100%);
-    background: -ms-linear-gradient(top,  .3269aa 0%,.82b3f4 100%);
-    background: linear-gradient(top,  .3269aa 0%,.82b3f4 100%);
+    background: -moz-linear-gradient(top,  #3269aa 0%, #82b3f4 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3269aa), color-stop(100%,#82b3f4));
+    background: -webkit-linear-gradient(top,  #3269aa 0%,#82b3f4 100%);
+    background: -o-linear-gradient(top,  #3269aa 0%,#82b3f4 100%);
+    background: -ms-linear-gradient(top,  #3269aa 0%,#82b3f4 100%);
+    background: linear-gradient(top,  #3269aa 0%,#82b3f4 100%);
     color: white;
     left: 0px;
     width: 54px;
 }
 .sliderBlock {
     background: #d9d9d8;
-    background: -moz-linear-gradient(top,  #d9d9d8 0%, .fcfcfc 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9d9d8), color-stop(100%,.fcfcfc));
-    background: -webkit-linear-gradient(top,  #d9d9d8 0%,.fcfcfc 100%);
-    background: -o-linear-gradient(top,  #d9d9d8 0%,.fcfcfc 100%);
-    background: -ms-linear-gradient(top,  #d9d9d8 0%,.fcfcfc 100%);
-    background: linear-gradient(top,  #d9d9d8 0%,.fcfcfc 100%);
+    background: -moz-linear-gradient(top,  #d9d9d8 0%, #fcfcfc 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9d9d8), color-stop(100%,#fcfcfc));
+    background: -webkit-linear-gradient(top,  #d9d9d8 0%,#fcfcfc 100%);
+    background: -o-linear-gradient(top,  #d9d9d8 0%,#fcfcfc 100%);
+    background: -ms-linear-gradient(top,  #d9d9d8 0%,#fcfcfc 100%);
+    background: linear-gradient(top,  #d9d9d8 0%,#fcfcfc 100%);
     border: 1px solid .a2a2a2;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -63,12 +63,12 @@
 }
 .sliderOff {
     background: #f2f3f2;
-    background: -moz-linear-gradient(top,  #8b8c8b 0%, .f2f3f2 50%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8b8c8b), color-stop(50%,.f2f3f2));
-    background: -webkit-linear-gradient(top,  #8b8c8b 0%,.f2f3f2 50%);
-    background: -o-linear-gradient(top,  #8b8c8b 0%,.f2f3f2 50%);
-    background: -ms-linear-gradient(top,  #8b8c8b 0%,.f2f3f2 50%);
-    background: linear-gradient(top,  #8b8c8b 0%,.f2f3f2 50%);
+    background: -moz-linear-gradient(top,  #8b8c8b 0%, #f2f3f2 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8b8c8b), color-stop(50%,#f2f3f2));
+    background: -webkit-linear-gradient(top,  #8b8c8b 0%,#f2f3f2 50%);
+    background: -o-linear-gradient(top,  #8b8c8b 0%,#f2f3f2 50%);
+    background: -ms-linear-gradient(top,  #8b8c8b 0%,#f2f3f2 50%);
+    background: linear-gradient(top,  #8b8c8b 0%,#f2f3f2 50%);
     color: #8b8b8b;
     left: 96px;
     width: 54px;
