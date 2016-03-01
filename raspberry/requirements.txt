@@ -1,5 +1,6 @@
-RPi.GPIO
 flask
 python-crontab
 sqlalchemy
 requests
+RPi.GPIO
+retrying
