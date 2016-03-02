@@ -120,13 +120,16 @@ class Commands(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
     def get(self):
-        template = JINJA_ENVIRONMENT.get_template('templates/commands.jinja2')
-        response = {
+        pins = self._get_pin_statuses()
+        pins_order = pins.keys()
+        pins_order.sort(key = lambda s: len(s))
+        data = {
             "procedures": config.procedures,
-            "pins": self._get_pin_statuses()
+            "pins_order": pins_order,
+            "pins": pins
         }
-
-        self.response.write(template.render(response))
+        template = JINJA_ENVIRONMENT.get_template('templates/commands.jinja2').render(data)
+        self.response.write(template)
 
 
 
@@ -142,9 +145,6 @@ class Commands(BaseHandler):
             self.error(403)
 
         url = "{}/{}".format(config.base_url, mapping[action]).format(entity=entity)
-        print "-"*90
-        print url
-        print "-"*90
         #result = urllib2.urlopen(url).read()
 
 

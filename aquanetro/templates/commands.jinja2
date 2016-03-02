@@ -11,15 +11,13 @@
       <a href="javascript:DoPost('set_procedure', '{{procedure}}')" type="button" class="btn btn-primary">{{text}}</a>
     {% endfor %}
 
-    <div class="checkboxes">
-      {% for pin_id, status in pins.iteritems() %}
+      {% for pin_id in pins_order %}
         <label class="checkbox">
           {{ pin_id }}
           <input pin_id="{{ pin_id }}" type="checkbox"
-                class={% if status %}"ios-switch checked" checked{% else %}"ios-switch"{% endif %}/>
+                class={% if pins[pin_id] %}"ios-switch checked" checked{% else %}"ios-switch"{% endif %}/>
         </label>
     {% endfor %}
-    </div>
     </div>
     </div>
     </div>
@@ -51,7 +49,7 @@
 
     // send command
     function DoPost(action, entity) {
-        $.post("/commands", {"action": action, "entity": entity});
+        $.post("/commands", {"action": action, "entity": entity})
     };
 
 </script>
