@@ -1,14 +1,11 @@
-import time
 import json
 import requests
 from flask import request
 
 from app.io import IO
-from app.cron import Cron
 from app.temperature import read_temp
-from lib.config import config
-from lib.helpers import get_statuses, get_times, send_temperature
-from lib.db import TempCommands, session
+from lib.helpers import get_statuses, send_temperature
+from lib.db import TempCommands
 
 #-------------------------------------------------------------------------------------------------
 def home():
@@ -17,7 +14,6 @@ def home():
 
 #-------------------------------------------------------------------------------------------------
 def open_pin(pin_id):
-
     obj = TempCommands.add_entry({pin_id: True})
     IO.open(pin_id)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
@@ -28,12 +24,6 @@ def close_pin(pin_id):
     obj = TempCommands.add_entry({pin_id: False})
     IO.close(pin_id)
     return "<h1 style='color:blue'>Hello There, {}</h1>".format(pin_id)
-
-
-#-------------------------------------------------------------------------------------------------
-def set_times_to_cron():
-    times = Cron.set_times()
-    return str(times)
 
 
 #-------------------------------------------------------------------------------------------------
@@ -61,12 +51,9 @@ def status():
     return json.dumps(get_statuses())
 
 
-#--------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------
 def reload_pins():
     statuses = get_statuses()
-    obj = TempCommands.get()
-    if obj is not None:
-        statuses.update(obj.statuses)
     IO.set_pins(statuses)
 
     return str(statuses)
@@ -86,7 +73,6 @@ def set_procedure(procedure):
     elif procedure == "reset":
         TempCommands.clear_all()
         statuses = get_statuses()
-
 
     obj = TempCommands.add_entry(statuses)
     IO.set_pins(statuses)

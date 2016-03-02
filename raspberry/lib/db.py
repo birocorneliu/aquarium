@@ -2,7 +2,6 @@ import json
 from datetime import datetime, timedelta
 from sqlalchemy import Column, Integer, String, DateTime, Float, desc
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -16,19 +15,6 @@ class Temperature(Base):
     id = Column(Integer, primary_key=True)
     temperature = Column(Float, nullable=False)
     register_date = Column(DateTime, default=datetime.now)
-
-
-###################################################################################################
-class CronConfig(Base):
-    __tablename__ = "cron_config"
-
-    id = Column(Integer, primary_key=True)
-    pin_id = Column(String(16), nullable=False)
-    on_hour = Column(Integer, nullable=False)
-    on_minute = Column(Integer, nullable=False)
-    off_hour = Column(Integer)
-    off_minute = Column(Integer)
-    quantity = Column(Integer)
 
 
 ###################################################################################################

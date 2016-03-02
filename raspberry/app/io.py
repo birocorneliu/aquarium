@@ -1,15 +1,14 @@
 #!/usr/bin/python
 import time
 from RPi import GPIO
-from lib.config import config
+from lib import config
 
 
 ###################################################################################################
 class IO_BASE(object):
-    PINS = config["pins"]
-    PIN_LIST = config["pin_list"]
-    NI_PINS = config["NI_pins"]
-    RESOURCES = config["resources"]
+    PINS = config.pins
+    NI_PINS = config.NI_pins
+    RESOURCES = config.resources
 
 
     #----------------------------------------------------------------------------------------------
@@ -21,8 +20,6 @@ class IO_BASE(object):
         self.CLOSE_PIN = GPIO.HIGH
         self.OPEN_NI_PIN = GPIO.HIGH
         self.CLOSE_NI_PIN = GPIO.LOW
-        #import pdb;pdb.set_trace()
-        #self.change_pin_status("pompa", self.OPEN_PIN)
 
 
     #----------------------------------------------------------------------------------------------
