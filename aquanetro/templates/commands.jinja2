@@ -7,55 +7,52 @@
     <div class="container">
 	<div class="row templatemorow">
 
-        <a href="http://raspberry.aquanet.ro/set_procedure/movie" type="button" class="btn btn-primary">Movie Time</a>
-        <a href="http://raspberry.aquanet.ro/set_procedure/lights_on" type="button" class="btn btn-primary">Lumini ON</a>
-        <a href="http://raspberry.aquanet.ro/set_procedure/lights_off" type="button" class="btn btn-primary">Lumini OFF</a>
-        <a href="http://raspberry.aquanet.ro/set_procedure/schimb_apa" type="button" class="btn btn-primary">Schimb Apa</a>
-        <a href="http://raspberry.aquanet.ro/set_procedure/reset" type="button" class="btn btn-primary">Reset</a>
+    {% for procedure, text in procedures.iteritems() %}
+      <a href="javascript:DoPost('set_procedure', '{{procedure}}')" type="button" class="btn btn-primary">{{text}}</a>
+    {% endfor %}
 
     <div class="checkboxes">
-      <label class="checkbox">Lampa 865
-          <input pin_id="865" type="checkbox" class="ios-switch" checked/></label>
-      <label class="checkbox">Lampa 830
-          <input pin_id="830" type="checkbox" class="ios-switch" /></label>
-      <label class="checkbox">Lampa LED
-          <input pin_id="led" type="checkbox" class="ios-switch" /></label>
+      {% for pin_id, status in pins.iteritems() %}
+        <label class="checkbox">
+          {{ pin_id }}
+          <input pin_id="{{ pin_id }}" type="checkbox"
+                class={% if status %}"ios-switch checked" checked{% else %}"ios-switch"{% endif %}/>
+        </label>
+    {% endfor %}
     </div>
     </div>
     </div>
-    <ul>
-    <li ng-hide="getSignedInState()" on-click="return false">
-                                <a class="btn btn-default btn-lg" ng-click="signIn()">Google+ SignIn</a>
-    </li></ul>
     </div>
 
 
 <script type="text/javascript">
+
+    // iOS switch initiate
     var switches = document.querySelectorAll('input[type="checkbox"].ios-switch');
     for (var i=0, sw; sw = switches[i++]; ) {
         var div = document.createElement('div');
         div.className = 'switch';
         sw.parentNode.insertBefore(div, sw.nextSibling);
-    }
+    };
 
-    function set_command(pin_id, status) {
-        $.ajax({
-            url: "http://raspberry.aquanet.ro/temperature/" + pin_id + "/" + status,
-        })
-    }
-
+    // iOS switch action
     $(".ios-switch").on("click", function() {
         var root = $(this)
         var pin_id = root.attr("pin_id")
-        if (root.hasClass("open")) {
-            root.removeClass("open")
-            var status = "close"
+        if (root.hasClass("checked")) {
+            root.removeClass("checked");
+            var action = "close_individual";
         } else {
-            root.addClass("open")
-            var status = "open"
+            root.addClass("checked");
+            var action = "open_individual";
         }
-        set_command(pin_id, status)
-    })
+        DoPost(action, pin_id);
+    });
+
+    // send command
+    function DoPost(action, entity) {
+        $.post("/commands", {"action": action, "entity": entity});
+    };
 
 </script>
  {% endblock %}

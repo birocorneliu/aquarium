@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="/css/templatemo_misc.css">
     <link href="/css/templatemo_style.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,600' rel='stylesheet' type='text/css'>
+    <!--  Facebook btn
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+    -->
 
     <script src="/js/jquery-1.10.2.min.js"></script>
 	<script src="/js/jquery.lightbox.js"></script>
@@ -89,12 +93,19 @@
                  	<div class="hex_footer">
 					 <span class="fa fa-linkedin"></span>
 					</div>
+
+<div>
+  <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+    <a href='javascript:sendTokenToServer()'></a>
+  </fb:login-button>
+</div>
                  </a>
             </div>
         </div>
         </div>
     </div>
     <!-- footer end -->
+  <script src="/js/app.js"></script>
  {% block footer_scripts %}{% endblock %}
 </body>
 </html>

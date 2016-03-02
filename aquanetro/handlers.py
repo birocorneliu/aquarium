@@ -1,12 +1,13 @@
 import os
 import jinja2
 import json
+import urllib2
 import endpoints
 import webapp2
 from webapp2_extras import sessions
 from protorpc import message_types, remote
 from google.appengine.api import mail, users
-from app import parser, presenter, db_calls, utils
+from app import parser, presenter, db_calls, utils, config
 
 
 
@@ -107,10 +108,44 @@ class Contact(BaseHandler):
 class Commands(BaseHandler):
 
     #----------------------------------------------------------------------------------------------
+    def _get_pin_statuses(self):
+        url = "{}/status".format(config.base_url)
+        try:
+            pins = json.loads(urllib2.urlopen(url).read())
+        except:
+            pins = {'830': False, '865': False, 'led': False}
+
+        return pins
+
+
+    #----------------------------------------------------------------------------------------------
     def get(self):
-        #import pdb; pdb.set_trace()
         template = JINJA_ENVIRONMENT.get_template('templates/commands.jinja2')
-        self.response.write(template.render({}))
+        response = {
+            "procedures": config.procedures,
+            "pins": self._get_pin_statuses()
+        }
+
+        self.response.write(template.render(response))
+
+
+
+    #----------------------------------------------------------------------------------------------
+    def post(self):
+        action = self.request.params.get("action")
+        entity = self.request.params.get("entity")
+        mapping = config.command_mapping
+
+        if action not in mapping:
+            self.error(404)
+        if self.session.get("name") != config.admin:
+            self.error(403)
+
+        url = "{}/{}".format(config.base_url, mapping[action]).format(entity=entity)
+        print "-"*90
+        print url
+        print "-"*90
+        #result = urllib2.urlopen(url).read()
 
 
 
@@ -162,14 +197,6 @@ class Temperature(BaseHandler):
 
 ###################################################################################################
 class Connect(BaseHandler):
-
-    #----------------------------------------------------------------------------------------------
-    def get(self):
-        #import pdb;pdb.set_trace()
-        template = JINJA_ENVIRONMENT.get_template('templates/login.jinja2')
-        self.response.write(template.render({}))
-        print self.session
-
 
     #----------------------------------------------------------------------------------------------
     def post(self):
