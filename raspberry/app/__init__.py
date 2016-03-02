@@ -2,6 +2,7 @@ from .endpoints import *
 
 ROUTES = (
     (["GET"], "/", home),
+    (["GET"], "/status", status),
     (["GET"], "/reload_pins", reload_pins),
     (["GET"], "/doser/<pin_id>/quantity/<int:quantity>", doser),
     (["GET"], "/temperature", temperature),

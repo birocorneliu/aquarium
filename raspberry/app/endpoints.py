@@ -1,4 +1,5 @@
 import time
+import json
 import requests
 from flask import request
 
@@ -56,6 +57,11 @@ def doser(pin_id, quantity):
 
 
 #--------------------------------------------------------------------------------------------------
+def status():
+    return json.dumps(get_statuses())
+
+
+#--------------------------------------------------------------------------------------------------
 def reload_pins():
     statuses = get_statuses()
     obj = TempCommands.get()
@@ -68,7 +74,6 @@ def reload_pins():
 
 #-------------------------------------------------------------------------------------------------
 def set_procedure(procedure):
-    #statuses = get_statuses(procedure)
     statuses = {}
     if procedure == "lights_on":
         statuses = {"865": True, "830": True}

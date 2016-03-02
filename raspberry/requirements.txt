@@ -1,6 +1,8 @@
-RPi.GPIO
+werkzeug
 flask
 flask-cors
 python-crontab
 sqlalchemy
 requests
+retrying
+RPi.GPIO
