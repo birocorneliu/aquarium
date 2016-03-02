@@ -145,7 +145,7 @@ class Commands(BaseHandler):
             self.error(403)
 
         url = "{}/{}".format(config.base_url, mapping[action]).format(entity=entity)
-        #result = urllib2.urlopen(url).read()
+        result = urllib2.urlopen(url).read()
 
 
 
