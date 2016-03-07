@@ -1,0 +1,20 @@
+I tried to reproduce the steps but it didn't work for me. I changed to arduino code and the steps as follow:  
+- Upload the arduino code
+- First short circuit the sensor BNC connector
+- adjust pot to read 512
+- connect ph probe
+- use rotterdam water ph 8.0, 20 degrees
+- reading is r1 (570)
+- use jus d'orange ph 3.8, 20 degrees
+- reading is r2 (440)
+- 8=r1*a+b
+- 3.8=r2*a+b
+- substract
+- 4.2= (r1-r2)*a
+- a=4.2/(r1-r2)  (0,0323)
+- b=8-r1*a       (10,415)
+- set a and b values in the arduino code
+
+Important is to use fluids which are 20 degrees and wait a few minutes for the signal to stabilise. For now i got stable results.
+
+I still don't know where the second potmeter is for and what the function is off the red LED (these two are connected with each other).
