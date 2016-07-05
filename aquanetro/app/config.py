@@ -11,9 +11,10 @@ command_mapping = {
 }
 
 procedures = {
-    "movie": "Movie Time",
+    "movie": "Film",
     "lights_on": "Lumini ON",
     "lights_off": "Lumini OFF",
     "schimb_apa": "Schimb Apa",
+    "feed": "Hranire",
     "reset": "Reset"
 }
