@@ -33,7 +33,7 @@ class TempCommands(Base):
 
     @classmethod
     #----------------------------------------------------------------------------------------------
-    def add_entry(cls, new_statuses):
+    def add_entry(cls, new_statuses, expire_delta=120):
         obj = cls.get()
         if obj:
             statuses = obj.statuses
@@ -42,7 +42,7 @@ class TempCommands(Base):
             statuses = {}
         statuses.update(new_statuses)
         obj.raw_statuses = json.dumps(statuses)
-        obj.expire_date = datetime.now() + timedelta(hours=2)
+        obj.expire_date = datetime.now() + timedelta(minutes=expire_delta)
         session.add(obj)
         session.commit()
         return obj

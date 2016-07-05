@@ -62,19 +62,28 @@ def reload_pins():
 #-------------------------------------------------------------------------------------------------
 def set_procedure(procedure):
     statuses = {}
+    db_save = True
+    expire_delta = 120
     if procedure == "lights_on":
         statuses = {"865": True, "830": True}
     elif procedure == "lights_off":
         statuses = {"865": False, "830": False, "led": False}
     elif procedure == "movie":
+        expire_delta = 150
         statuses = {"865": False, "830": False, "led": True}
     elif procedure == "schimb_apa":
         statuses = {"865": True, "830": False, "led": True, "pompa": False, "incalzitor": False}
+    elif procedure == "feed":
+        expire_delta = 10
+        statuses = {"pompa": False}
     elif procedure == "reset":
+        db_save = False
         TempCommands.clear_all()
         statuses = get_statuses()
 
-    obj = TempCommands.add_entry(statuses)
+    if db_save:
+        TempCommands.add_entry(statuses, expire_delta)
+
     IO.set_pins(statuses)
 
     return procedure
