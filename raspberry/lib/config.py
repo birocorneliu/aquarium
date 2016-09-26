@@ -20,7 +20,7 @@ WHATER_LEVEL_PIN = 5
 pins = {
     "865":  19,
     "830": 	16,
-    "led": 23,
+    "led_rgb": 23,
     "co2": 	26,
     "pompa": 20,
     "incalzitor": 21,
@@ -28,24 +28,24 @@ pins = {
     "macro": 24,
     "fier":  27,
     "twinstar": 13,
-    "supplemental_pin1": 6,
+    "led": 6,
     "supplemental_pin2": 12
 }
 resources = {
-    "micro": 3.3,
-    "macro": 3.3,
-    "fier": 3.3,
+    "micro": 3.6,
+    "macro": 3.6,
+    "fier": 3.6,
     "twinstar": 1
 }
 lights = [
-    Light(**{"id": "co2", "on_hour":  5, "on_minute": 40, "off_hour": 7, "off_minute": 30}),
-    Light(**{"id": "830", "on_hour":  6, "on_minute":  0, "off_hour": 8, "off_minute":  0}),
-    Light(**{"id": "865", "on_hour":  6, "on_minute": 10, "off_hour": 7, "off_minute": 50}),
+    Light(**{"id": "led",       "on_hour":  5, "on_minute": 50, "off_hour": 8, "off_minute": 30}),
+    Light(**{"id": "led_rgb",   "on_hour":  5, "on_minute": 40, "off_hour": 8, "off_minute": 40}),
 
 
-    Light(**{"id": "co2", "on_hour": 15, "on_minute": 30, "off_hour": 20, "off_minute": 30}),
-    Light(**{"id": "830", "on_hour": 16, "on_minute": 40, "off_hour": 22, "off_minute":  0}),
-    Light(**{"id": "865", "on_hour": 17, "on_minute":  0, "off_hour": 21, "off_minute": 30}),
-    Light(**{"id": "led", "on_hour": 21, "on_minute": 30, "off_hour": 22, "off_minute": 30}),
+    Light(**{"id": "led",       "on_hour": 17, "on_minute":  0, "off_hour": 22, "off_minute": 15}),
+    Light(**{"id": "led_rgb",   "on_hour": 16, "on_minute": 50, "off_hour": 22, "off_minute": 30}),
+
+    #Light(**{"id": "830", "on_hour": 16, "on_minute": 40, "off_hour": 22, "off_minute":  0}),
+    #Light(**{"id": "865", "on_hour": 17, "on_minute":  0, "off_hour": 21, "off_minute": 30}),
 ]
 

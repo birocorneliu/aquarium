@@ -65,14 +65,14 @@ def set_procedure(procedure):
     db_save = True
     expire_delta = 120
     if procedure == "lights_on":
-        statuses = {"865": True, "830": True}
+        statuses = {"865": True, "led": True, "led_rgb": True}
     elif procedure == "lights_off":
-        statuses = {"865": False, "830": False, "led": False}
+        statuses = {"865": False, "led": False, "led_rgb": False}
     elif procedure == "movie":
         expire_delta = 150
-        statuses = {"865": False, "830": False, "led": True}
+        statuses = {"865": False, "led": False, "led_rgb": True}
     elif procedure == "schimb_apa":
-        statuses = {"865": True, "830": False, "led": True, "pompa": False, "incalzitor": False}
+        statuses = {"865": False, "led": True, "led_rgb": True, "pompa": False, "incalzitor": False}
     elif procedure == "feed":
         expire_delta = 10
         statuses = {"pompa": False}
