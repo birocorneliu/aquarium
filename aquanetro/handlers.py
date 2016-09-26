@@ -167,11 +167,11 @@ class CheckFishStatus(BaseHandler):
         #get_config
         #message = get_fish_status_warning()
         message = "ai o buba gogule"
-        if message:
-            subject = "O problema la acvariu!!!"
-            sender_address = "FishAPP Support <corneliu.biro@gmail.com>"
-            for user_address in ["corneliu.biro@gmail.com"]: #config.emails
-                mail.send_mail(sender_address, user_address, subject, message)
+        #if message:
+        #    subject = "O problema la acvariu!!!"
+        #    sender_address = "FishAPP Support <corneliu.biro@gmail.com>"
+        #    for user_address in ["corneliu.biro@gmail.com"]: #config.emails
+        #        mail.send_mail(sender_address, user_address, subject, message)
 
 
 
