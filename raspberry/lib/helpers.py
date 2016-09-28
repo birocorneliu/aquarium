@@ -1,3 +1,4 @@
+import json
 import requests
 from datetime import datetime
 from retrying import retry
@@ -43,4 +44,19 @@ def get_times():
             times.append((light.on_hour, light.on_minute))
 
     return times
+
+
+#--------------------------------------------------------------------------------------------------
+def send_alert(body, title="Alerta acvariu"):
+    url = "https://api.pushbullet.com/v2/pushes"
+    headers = {
+        "Access-Token": "o.nkeVGJI9f2EP9w8B6OR0O3wMzdKt3N0D",
+        "Content-Type": "application/json"
+    }
+    data = json.dumps({
+        "title": title,
+        "body": body,
+        "type": "note"
+    })
+    response = requests.post(url, headers=headers, data=data)
 

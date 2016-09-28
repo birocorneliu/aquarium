@@ -4,12 +4,23 @@ from flask import request
 
 from app.io import IO
 from app.temperature import read_temp
-from lib.helpers import get_statuses, send_temperature
+from lib.helpers import get_statuses, send_temperature, send_alert
 from lib.db import TempCommands
+from lib import config
 
 #-------------------------------------------------------------------------------------------------
 def home():
     return "<h1 style='color:blue'>Hello There!</h1>"
+
+
+#-------------------------------------------------------------------------------------------------
+def find_issues():
+    if config.TEMP_MIN < read_temp()< config.TEMP_MAX:
+        return "Status OK, temp: {} Celsius".format(read_temp())
+    else:
+        message = "Status NOT OK, temp: {} Celsius".format(read_temp())
+        send_alert(message)
+        return message
 
 
 #-------------------------------------------------------------------------------------------------

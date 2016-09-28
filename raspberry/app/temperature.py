@@ -4,7 +4,7 @@ PATH_PREFIX = "/sys/bus/w1/devices"
 PATH_SUFIX = "w1_slave"
 
 def read_temp():
-    path = "{}/{}/{}".format(PATH_PREFIX, config.temp_id, PATH_SUFIX)
+    path = "{}/{}/{}".format(PATH_PREFIX, config.TEMP_ID, PATH_SUFIX)
 
     with open(path) as file_obj:
         data = [line.strip() for line in file_obj.readlines()]

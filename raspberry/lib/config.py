@@ -14,12 +14,16 @@ class Light(object):
 
 ###################################################################################################
 
-temp_id = "28-03146adc35ff"
-NI_pins = ["pompa", "incalzitor"]
+TEMP_MIN = 22.0
+TEMP_MAX = 28.0
 WHATER_LEVEL_PIN = 5
+TEMP_ID = "28-03146adc35ff"
+PUSH_BULLET_AUTH = "o.nkeVGJI9f2EP9w8B6OR0O3wMzdKt3N0D"
+NI_pins = ["pompa", "incalzitor"]
+
 pins = {
     "865":  19,
-    "830": 	16,
+    "reflector": 16,
     "led_rgb": 23,
     "co2": 	26,
     "pompa": 20,
@@ -42,10 +46,11 @@ lights = [
     Light(**{"id": "led_rgb",   "on_hour":  5, "on_minute": 40, "off_hour": 8, "off_minute": 40}),
 
 
-    Light(**{"id": "led",       "on_hour": 17, "on_minute":  0, "off_hour": 22, "off_minute": 15}),
+    Light(**{"id": "led",       "on_hour": 17, "on_minute":  0, "off_hour": 19, "off_minute": 35}),
     Light(**{"id": "led_rgb",   "on_hour": 16, "on_minute": 50, "off_hour": 22, "off_minute": 30}),
+    Light(**{"id": "reflector", "on_hour": 19, "on_minute": 30, "off_hour": 22, "off_minute":  0}),
 
-    #Light(**{"id": "830", "on_hour": 16, "on_minute": 40, "off_hour": 22, "off_minute":  0}),
-    #Light(**{"id": "865", "on_hour": 17, "on_minute":  0, "off_hour": 21, "off_minute": 30}),
+
+    Light(**{"id": "865", "on_hour": 17, "on_minute":  0, "off_hour": 17, "off_minute": 0}),
 ]
 
