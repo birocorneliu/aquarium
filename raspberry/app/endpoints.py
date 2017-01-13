@@ -31,6 +31,14 @@ def open_pin(pin_id):
 
 
 #-------------------------------------------------------------------------------------------------
+def open_pin_time(pin_id, expire_delta):
+    TempCommands.add_entry({pin_id: True}, expire_delta)
+    IO.open(pin_id)
+    return "<h1 style='color:blue'>Hello There, {} for {} minutes</h1>".format(pin_id, expire_delta)
+
+
+
+#-------------------------------------------------------------------------------------------------
 def close_pin(pin_id):
     obj = TempCommands.add_entry({pin_id: False})
     IO.close(pin_id)
@@ -83,10 +91,10 @@ def set_procedure(procedure):
         expire_delta = 150
         statuses = {"865": False, "led": False, "led_rgb": True}
     elif procedure == "schimb_apa":
-        statuses = {"865": False, "led": True, "led_rgb": True, "pompa": False, "incalzitor": False}
+        statuses = {"865": False, "led": True, "led_rgb": True, "pompa": False, "incalzitor": False, "circulant": False}
     elif procedure == "feed":
         expire_delta = 10
-        statuses = {"pompa": False}
+        statuses = {"pompa": False, "incalzitor": False}
     elif procedure == "reset":
         db_save = False
         TempCommands.clear_all()

@@ -8,6 +8,7 @@ ROUTES = (
     (["GET"], "/doser/<pin_id>/quantity/<int:quantity>", doser),
     (["GET"], "/temperature", temperature),
     (["GET"], "/pin/<pin_id>/open", open_pin),
+    (["GET"], "/pin/<pin_id>/open/<int:expire_delta>", open_pin_time),
     (["GET"], "/pin/<pin_id>/close", close_pin),
     (["GET"], "/set_procedure/<procedure>", set_procedure),
 
