@@ -84,17 +84,23 @@ def set_procedure(procedure):
     db_save = True
     expire_delta = 120
     if procedure == "lights_on":
-        statuses = {"865": True, "led": True, "led_rgb": True}
+        statuses = {"led": True, "led_rgb": True}
     elif procedure == "lights_off":
-        statuses = {"865": False, "led": False, "led_rgb": False}
+        statuses = {"led": False, "led_rgb": False}
     elif procedure == "movie":
         expire_delta = 150
-        statuses = {"865": False, "led": False, "led_rgb": True}
+        statuses = {"led": False, "led_rgb": True}
     elif procedure == "schimb_apa":
-        statuses = {"865": False, "led": True, "led_rgb": True, "pompa": False, "incalzitor": False, "circulant": False}
+        statuses = {"led": True, "led_rgb": True, "pompa": False, "incalzitor": False, "circulant": False}
     elif procedure == "feed":
         expire_delta = 10
-        statuses = {"pompa": False, "incalzitor": False}
+        statuses = {"pompa": False, "circulant": False}
+    elif procedure == "switch_lights":
+        statuses = get_statuses()
+        if statuses.get("led") or statuses.get("led_rgb"):
+            statuses.update({"led": False, "led_rgb": False})
+        else:
+            statuses.update({"led": True, "led_rgb": True})
     elif procedure == "reset":
         db_save = False
         TempCommands.clear_all()

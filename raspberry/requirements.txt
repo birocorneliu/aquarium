@@ -6,3 +6,8 @@ sqlalchemy
 requests
 retrying
 RPi.GPIO
+jinja2
+itsdangerous
+click
+six
+

@@ -71,6 +71,12 @@ pins = {
     "led": 6,
     "supplemental_pin2": 12
 }
+button_pins = {
+    "reset": 11, #green
+    "schimb_apa": 9, #red
+    "feed": 10, #yellow
+    "switch_lights": 5, #black
+}
 resources = {
     "micro": 3.6,
     "macro": 3.6,
@@ -88,6 +94,7 @@ lights = [
 
 
     #Light(**{"id": "polish", "_on_hour": 17, "on_minute":  0, "_off_hour": 17, "off_minute": 0}),
-    Light(**{"id": "circulant", "_on_hour": "*", "on_minute":  0, "_off_hour": "*", "off_minute": 10}),
+    Light(**{"id": "circulant", "_on_hour": 17, "on_minute": 10, "_off_hour": 21, "off_minute": 50}),
+    #Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 30, "_off_hour": "*", "off_minute": 40}),
 ]
 
