@@ -84,23 +84,23 @@ def set_procedure(procedure):
     db_save = True
     expire_delta = 120
     if procedure == "lights_on":
-        statuses = {"led": True, "led_rgb": True}
+        statuses = {"led_daylight": True, "led_albastru": True}
     elif procedure == "lights_off":
-        statuses = {"led": False, "led_rgb": False}
+        statuses = {"led_daylight": False, "led_albastru": False}
     elif procedure == "movie":
         expire_delta = 150
-        statuses = {"led": False, "led_rgb": True}
+        statuses = {"led_daylight": False, "led_albastru": True}
     elif procedure == "schimb_apa":
-        statuses = {"led": True, "led_rgb": True, "pompa": False, "incalzitor": False, "circulant": False}
+        statuses = {"led_daylight": True, "led_albastru": True, "pompa": False, "incalzitor": False, "circulant": False}
     elif procedure == "feed":
         expire_delta = 10
         statuses = {"pompa": False, "circulant": False}
     elif procedure == "switch_lights":
         statuses = get_statuses()
-        if statuses.get("led") or statuses.get("led_rgb"):
-            statuses.update({"led": False, "led_rgb": False})
+        if statuses.get("led_daylight") or statuses.get("led_albastru"):
+            statuses.update({"led_daylight": False, "led_albastru": False, "reflector": False})
         else:
-            statuses.update({"led": True, "led_rgb": True})
+            statuses.update({"led_daylight": True, "led_albastru": True, "reflector": True})
     elif procedure == "reset":
         db_save = False
         TempCommands.clear_all()

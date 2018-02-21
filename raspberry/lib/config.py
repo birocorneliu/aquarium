@@ -58,9 +58,9 @@ PUSH_BULLET_AUTH = "o.nkeVGJI9f2EP9w8B6OR0O3wMzdKt3N0D"
 NI_pins = ["pompa", "incalzitor"]
 
 pins = {
-    "polish":  19,
-    "reflector": 16,
-    "led_rgb": 23,
+    "led_albastru":  19,
+    "led_daylight": 16,
+    "led_rgb_12v": 23,
     "circulant": 26,
     "pompa": 20,
     "incalzitor": 21,
@@ -68,7 +68,7 @@ pins = {
     "macro": 24,
     "fier":  27,
     "twinstar": 13,
-    "led": 6,
+    "led_12v": 6,
     "supplemental_pin2": 12
 }
 button_pins = {
@@ -84,17 +84,21 @@ resources = {
     "twinstar": 1
 }
 lights = [
-    Light(**{"id": "led",       "_on_hour":  6, "on_minute": 30, "_off_hour": 8, "off_minute": 30}),
-    Light(**{"id": "led_rgb",   "_on_hour":  6, "on_minute": 25, "_off_hour": 8, "off_minute": 40}),
+    #Light(**{"id": "led",       "_on_hour":  6, "on_minute": 30, "_off_hour": 8, "off_minute": 30}),
+    Light(**{"id": "led_daylight",       "_on_hour":  6, "on_minute": 30, "_off_hour": 8, "off_minute": 30}),
+    Light(**{"id": "led_albastru",   "_on_hour":  6, "on_minute": 25, "_off_hour": 8, "off_minute": 40}),
 
 
-    Light(**{"id": "led_rgb",   "_on_hour": 16, "on_minute": 50, "_off_hour": 22, "off_minute": 30}),
-    Light(**{"id": "led",       "_on_hour": 17, "on_minute":  0, "_off_hour": 22, "off_minute":  0}),
-    Light(**{"id": "reflector", "_on_hour": 19, "on_minute": 30, "_off_hour": 19, "off_minute": 40}),
+    Light(**{"id": "led_albastru",   "_on_hour": 16, "on_minute": 50, "_off_hour": 22, "off_minute": 30}),
+    #Light(**{"id": "led",       "_on_hour": 17, "on_minute":  0, "_off_hour": 22, "off_minute":  0}),
+    Light(**{"id": "led_daylight",       "_on_hour": 17, "on_minute":  0, "_off_hour": 22, "off_minute":  0}),
+
 
 
     #Light(**{"id": "polish", "_on_hour": 17, "on_minute":  0, "_off_hour": 17, "off_minute": 0}),
-    Light(**{"id": "circulant", "_on_hour": 17, "on_minute": 10, "_off_hour": 21, "off_minute": 50}),
-    #Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 30, "_off_hour": "*", "off_minute": 40}),
+    #Light(**{"id": "circulant", "_on_hour": 17, "on_minute": 10, "_off_hour": 21, "off_minute": 50}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute":  0, "_off_hour": "*", "off_minute": 10}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 20, "_off_hour": "*", "off_minute": 30}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 40, "_off_hour": "*", "off_minute": 50}),
 ]
 
