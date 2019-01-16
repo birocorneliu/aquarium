@@ -1,7 +1,10 @@
 import os
 import sys
 from flask import Flask, redirect
-from flask.ext.cors import CORS
+try:
+    from flask.ext.cors import CORS
+except:
+    from flask_cors import CORS
 
 from app import ROUTES
 from lib.exceptions import APPException
