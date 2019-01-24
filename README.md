@@ -41,6 +41,8 @@ sudo pip install -r requirements.txt
 . ../../bin/activate
 make configure
 sudo cp config_files/supervisor/*.conf /etc/supervisor/conf.d/
+echo "" | sudo tee -a /etc/crontab
+echo "* *     * * *   root    curl http://127.0.0.1/reload_pins" | sudo tee -a /etc/crontab
 sudo supervisorctl update
 tail -f /var/log/supervisor/aquarium_stderr.log 
 ```
