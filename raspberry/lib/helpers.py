@@ -5,7 +5,7 @@ from retrying import retry
 
 from app.temperature import read_temp
 from lib import config
-from lib.db import TempCommands, session
+from lib.db import TempCommands
 
 
 @retry(stop_max_attempt_number=10, wait_fixed=1000)

@@ -5,7 +5,7 @@ from flask import request
 from app.io import IO
 from app.temperature import read_temp
 from lib.helpers import get_statuses, send_temperature, send_alert
-from lib.db import TempCommands
+from lib.db import Temperature, TempCommands
 from lib import config
 
 #-------------------------------------------------------------------------------------------------
@@ -54,9 +54,17 @@ def temperature():
 
 
 #-------------------------------------------------------------------------------------------------
+def set_temperature():
+    temperature = str(read_temp())
+    Temperature.add_entry(temperature)
+
+    return temperature
+
+
+#-------------------------------------------------------------------------------------------------
 def get_temperatures():
-    response = requests.get("http://aquanet.ro/temperature")
-    return response.content
+    temps = Temperature.get()
+    return json.dumps([{"temperature": t.temperature, "register_date": str(t.register_date)} for t in temps])
 
 
 #--------------------------------------------------------------------------------------------------
