@@ -70,9 +70,10 @@ resources = {
     "feeder": 3.8,
 }
 lights = [
-    Light(**{"id": "led_rgb",   "_on_hour":  6, "on_minute":  0, "_off_hour": 21, "off_minute":  0}),
+    Light(**{"id": "led_rgb",   "_on_hour":  6, "on_minute":  0, "_off_hour":  9, "off_minute": 30}),
     Light(**{"id": "led_6500",  "_on_hour":  9, "on_minute":  0, "_off_hour": 16, "off_minute": 30}),
     Light(**{"id": "led_4000",  "_on_hour":  9, "on_minute": 30, "_off_hour": 16, "off_minute":  0}),
+    Light(**{"id": "led_rgb",   "_on_hour": 16, "on_minute":  0, "_off_hour": 21, "off_minute":  0}),
 
     Light(**{"id": "filtru_uv", "_on_hour": 21, "on_minute":  0, "_off_hour":  5, "off_minute":  0}),
 
