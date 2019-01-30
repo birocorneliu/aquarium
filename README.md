@@ -43,6 +43,7 @@ sudo cp config_files/supervisor/*.conf /etc/supervisor/conf.d/
 echo "" | sudo tee -a /etc/crontab
 echo "* *     * * *   root    curl http://127.0.0.1/reload_pins" | sudo tee -a /etc/crontab
 echo "*/10 *     * * *   root    curl http://127.0.0.1/set_temperature" | sudo tee -a /etc/crontab
+echo "0 12    * * *   root    curl http://127.0.0.1/doser/feeder/quantity/1" | sudo tee -a /etc/crontab
 sudo supervisorctl update
 tail -f /var/log/supervisor/aquarium_stderr.log 
 ```
