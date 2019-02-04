@@ -81,7 +81,6 @@ def reload_pins():
 #-------------------------------------------------------------------------------------------------
 def set_procedure(procedure):
     statuses = {}
-    db_save = True
     expire_delta = 120
     if procedure == "lights_on":
         statuses = {"led_daylight": True, "led_albastru": True}
@@ -102,13 +101,9 @@ def set_procedure(procedure):
         else:
             statuses.update({"led_daylight": True, "led_albastru": True, "reflector": True})
     elif procedure == "reset":
-        db_save = False
-        TempCommands.clear_all()
-        statuses = get_statuses()
+        statuses = get_statuses(with_db=False)
 
-    if db_save:
-        TempCommands.add_entry(statuses, expire_delta)
-
+    TempCommands.add_entry(statuses, expire_delta)
     IO.set_pins(statuses)
 
     return procedure

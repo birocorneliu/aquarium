@@ -107,7 +107,10 @@ class TempCommands(Base):
     #----------------------------------------------------------------------------------------------
     def clear_all(cls):
         session = DBSession()
-        session.query(cls).delete()
+        items = session.query(cls)
+        print items
+        items.delete()
+
         session.close()
 
 
