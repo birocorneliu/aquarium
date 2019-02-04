@@ -41,13 +41,18 @@ sudo pip install -r requirements.txt
 . ../../bin/activate
 make configure
 sudo cp config_files/supervisor/*.conf /etc/supervisor/conf.d/
+echo "" | sudo tee -a /etc/crontab
+echo "* *     * * *   root    curl http://127.0.0.1/reload_pins" | sudo tee -a /etc/crontab
+echo "*/10 *     * * *   root    curl http://127.0.0.1/set_temperature" | sudo tee -a /etc/crontab
 sudo supervisorctl update
 tail -f /var/log/supervisor/aquarium_stderr.log 
 ```
 
 #### Set Temperature sensor
-`sudo vim /boot/config.txt` and write at the bottom **dtoverlay=w1-gpio**
 ```
+echo "dtoverlay=w1-gpio" | sudo tee -a /boot/config.txt
+sudo reboot
+
 sudo modprobe w1-gpio
 sudo modprobe w1-therm
 ls /sys/bus/w1/devices
