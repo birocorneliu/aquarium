@@ -97,8 +97,11 @@ lights = [
 
     #Light(**{"id": "polish", "_on_hour": 17, "on_minute":  0, "_off_hour": 17, "off_minute": 0}),
     #Light(**{"id": "circulant", "_on_hour": 17, "on_minute": 10, "_off_hour": 21, "off_minute": 50}),
-    Light(**{"id": "circulant", "_on_hour": "*", "on_minute":  0, "_off_hour": "*", "off_minute": 10}),
-    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 20, "_off_hour": "*", "off_minute": 30}),
-    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 40, "_off_hour": "*", "off_minute": 50}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute":  0, "_off_hour": "*", "off_minute":  1}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 10, "_off_hour": "*", "off_minute": 11}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 20, "_off_hour": "*", "off_minute": 21}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 30, "_off_hour": "*", "off_minute": 31}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 40, "_off_hour": "*", "off_minute": 41}),
+    Light(**{"id": "circulant", "_on_hour": "*", "on_minute": 50, "_off_hour": "*", "off_minute": 51}),
 ]
 
