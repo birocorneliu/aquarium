@@ -1,0 +1,134 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#fish {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: url("/client/cyberfish.jpg") no-repeat;
+  background-size: cover;
+  opacity: 0.05;
+}
+
+#reset {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  border: 0 none transparent;
+  background: transparent;
+  color: #999;
+  padding: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#reset:hover {
+  color: #006994;
+}
+
+#container {
+  width: 790px;
+  min-height: 400px;
+  margin: 36px 24px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#commands {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-grow: 2;
+  max-width: 320px;
+}
+
+#commands button {
+  width: 100%;
+  min-width: 180px;
+  height: 30px;
+  text-transform: capitalize;
+  background: transparent;
+  color: #999;
+  margin: 3px 0;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  border-left: 0px;
+  border-right: 0px;
+
+  text-align: left;
+
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+#commands button:hover {
+  color: #ddd;
+  border: 1px solid #252525;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+#commands button::after {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  right: 3px;
+  width: 48px;
+  content: " ";
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 22px;
+
+  background: #252525;
+  box-sizing: border-box;
+  border: 1px solid #464646;
+  text-align: center;
+  color: #bbb;
+
+  transition: background 0.5s;
+}
+
+#commands button[data-value="on"]::after {
+  content: "on";
+  background: #006994;
+}
+
+#commands button[data-value="off"]::after {
+  content: "off";
+  color: #999;
+  background: #464646;
+}
+
+
+#plot {
+  max-width: 540px;
+}
+
+@media all and (max-width: 550px) {
+  #plot {
+    max-width: 400px;
+  }
+}

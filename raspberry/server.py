@@ -21,7 +21,7 @@ CORS(app)
 # Add client files
 client_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'client')
 
-@app.route('/client', methods=['GET'])
+@app.route('/', methods=['GET'])
 def serve_dir_directory_index():
     return send_from_directory(client_file_dir, 'index.html')
 
@@ -53,4 +53,3 @@ sys.path.append(PATH)
 if __name__ == "__main__":
     app.debug = True
     app.run(host='0.0.0.0', port=80)
-
