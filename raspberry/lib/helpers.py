@@ -19,7 +19,7 @@ def send_temperature():
 
 
 #--------------------------------------------------------------------------------------------------
-def get_statuses():
+def get_statuses(with_db=True):
     status = {pin_id: True for pin_id in config.NI_pins}
     current = datetime.now().replace(second=0, microsecond=0)
     for light in config.lights:
@@ -30,7 +30,7 @@ def get_statuses():
             status[light.id] = True
 
     obj = TempCommands.get()
-    if obj is not None:
+    if with_db and obj is not None:
         status.update(obj.statuses)
 
     return status

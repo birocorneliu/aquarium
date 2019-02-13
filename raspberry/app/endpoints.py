@@ -89,34 +89,30 @@ def reload_pins():
 #-------------------------------------------------------------------------------------------------
 def set_procedure(procedure):
     statuses = {}
-    db_save = True
     expire_delta = 120
     if procedure == "lights_on":
-        statuses = {"led_daylight": True, "led_albastru": True}
+        statuses = {"led_4000": True, "led_6500": True}
     elif procedure == "lights_off":
-        statuses = {"led_daylight": False, "led_albastru": False}
+        statuses = {"led_4000": False, "led_6500": False}
     elif procedure == "movie":
         expire_delta = 150
-        statuses = {"led_daylight": False, "led_albastru": True}
+        statuses = {"led_4000": False, "led_6500": True}
     elif procedure == "schimb_apa":
-        statuses = {"led_daylight": True, "led_albastru": True, "pompa": False, "incalzitor": False, "circulant": False}
+        statuses = {"led_4000": True, "led_6500": True, "filtru": False, "incalzitor": False, "circulant": False}
     elif procedure == "feed":
         expire_delta = 10
-        statuses = {"pompa": False, "circulant": False}
+        statuses = {"filtru": False, "circulant": False}
     elif procedure == "switch_lights":
         statuses = get_statuses()
-        if statuses.get("led_daylight") or statuses.get("led_albastru"):
-            statuses.update({"led_daylight": False, "led_albastru": False, "reflector": False})
+        if statuses.get("led_4000") or statuses.get("led_6500"):
+            statuses.update({"led_4000": False, "led_6500": False, "reflector": False})
         else:
-            statuses.update({"led_daylight": True, "led_albastru": True, "reflector": True})
+            statuses.update({"led_4000": True, "led_6500": True, "reflector": True})
     elif procedure == "reset":
-        db_save = False
         TempCommands.clear_all()
-        statuses = get_statuses()
+        statuses = get_statuses(with_db=False)
 
-    if db_save:
-        TempCommands.add_entry(statuses, expire_delta)
-
+    TempCommands.add_entry(statuses, expire_delta)
     IO.set_pins(statuses)
 
     return procedure
