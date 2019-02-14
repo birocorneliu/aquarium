@@ -98,7 +98,7 @@ const createCommands = async function() {
 const initialize = function() {
   const resetBtn = document.querySelector("#reset");
   resetBtn.addEventListener("click", async () => {
-    await loadData("/reload_pins");
+    await loadData("/set_procedure/reset");
 
     createCommands();
   })

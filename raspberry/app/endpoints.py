@@ -1,10 +1,12 @@
 import json
 import requests
 from flask import request
+from datetime import datetime, timedelta
+from dateutil.parser import parse
 
 from app.io import IO
 from app.temperature import read_temp
-from lib.helpers import get_statuses, send_temperature, send_alert
+from lib import helpers 
 from lib.db import Temperature, TempCommands
 from lib import config
 
@@ -19,7 +21,7 @@ def find_issues():
         return "Status OK, temp: {} Celsius".format(read_temp())
     else:
         message = "Status NOT OK, temp: {} Celsius".format(read_temp())
-        send_alert(message)
+        helpers.send_alert(message)
         return message
 
 
@@ -50,7 +52,18 @@ def temperature():
     if request.method == "GET":
         return str(read_temp())
     else:
-        return send_temperature()
+        return helpers.send_temperature()
+
+
+#-------------------------------------------------------------------------------------------------
+def pc_stats():
+    return json.dumps({
+        "memory_indo": helpers.get_ram_info(),
+        "cpu_info": {
+            "temperature": helpers.get_cpu_temperature(),
+            "load": helpers.get_cpu_use()
+        },
+    })
 
 
 #-------------------------------------------------------------------------------------------------
@@ -63,8 +76,19 @@ def set_temperature():
 
 #-------------------------------------------------------------------------------------------------
 def get_temperatures():
-    temps = Temperature.get()
-    return json.dumps([{"temperature": t.temperature, "register_date": str(t.register_date)} for t in temps])
+    end_date = request.args.get("end_date")
+    end_date = parse(end_date) if end_date else datetime.now()
+    start_date = request.args.get("start_date")
+    start_date = parse(start_date) if start_date else end_date - timedelta(days=3)
+    temps = Temperature.get(start_date, end_date)
+   
+    data = []
+    for temp in temps:
+        data.append({
+            "temperature": temp.temperature, 
+            "register_date": temp.register_date.strftime("%Y-%m-%d %H:%M")
+        })
+    return json.dumps(data)
 
 
 #--------------------------------------------------------------------------------------------------
@@ -75,12 +99,12 @@ def doser(pin_id, quantity):
 
 #--------------------------------------------------------------------------------------------------
 def status():
-    return json.dumps(get_statuses())
+    return json.dumps(helpers.get_statuses())
 
 
 #-------------------------------------------------------------------------------------------------
 def reload_pins():
-    statuses = get_statuses()
+    statuses = helpers.get_statuses()
     IO.set_pins(statuses)
 
     return str(statuses)
@@ -103,14 +127,14 @@ def set_procedure(procedure):
         expire_delta = 10
         statuses = {"filtru": False, "circulant": False}
     elif procedure == "switch_lights":
-        statuses = get_statuses()
+        statuses = helpers.get_statuses()
         if statuses.get("led_4000") or statuses.get("led_6500"):
             statuses.update({"led_4000": False, "led_6500": False, "reflector": False})
         else:
             statuses.update({"led_4000": True, "led_6500": True, "reflector": True})
     elif procedure == "reset":
         TempCommands.clear_all()
-        statuses = get_statuses(with_db=False)
+        statuses = helpers.get_statuses(with_db=False)
 
     TempCommands.add_entry(statuses, expire_delta)
     IO.set_pins(statuses)

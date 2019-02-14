@@ -22,7 +22,7 @@ body {
   pointer-events: none;
   background: url("/client/cyberfish.jpg") no-repeat;
   background-size: cover;
-  opacity: 0.05;
+  opacity: 0.2;
 }
 
 #reset {

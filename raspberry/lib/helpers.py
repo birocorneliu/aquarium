@@ -1,5 +1,7 @@
 import json
 import requests
+import os
+from subprocess import PIPE, Popen
 from datetime import datetime
 from retrying import retry
 
@@ -60,3 +62,28 @@ def send_alert(body, title="Alerta acvariu"):
     })
     response = requests.post(url, headers=headers, data=data)
 
+#--------------------------------------------------------------------------------------------------
+def get_cpu_temperature():
+    temp = os.popen('vcgencmd measure_temp').readline()
+    return temp.replace("temp=","").replace("'C\n","")
+
+
+#--------------------------------------------------------------------------------------------------
+def get_cpu_use():
+    p = os.popen('mpstat')
+    for i in range(4):
+        line = p.readline()
+
+    return float("{:.2f}".format(100 - float(line.strip().split()[-1])))
+
+#--------------------------------------------------------------------------------------------------
+def get_ram_info():
+    p = os.popen('free')
+    for i in range(2):
+        line = p.readline()
+
+    return {
+        "total": line.split()[1],
+        "used": line.split()[2],
+        "free": line.split()[3],
+    }

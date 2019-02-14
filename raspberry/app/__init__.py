@@ -14,4 +14,5 @@ ROUTES = (
 
     (["GET"], "/get_temperatures", get_temperatures),
     (["GET", "POST"], "/temperature", temperature),
+    (["GET"], "/pc_stats", pc_stats),
 )

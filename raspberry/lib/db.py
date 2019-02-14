@@ -33,10 +33,11 @@ class Temperature(Base):
 
     @classmethod
     #----------------------------------------------------------------------------------------------
-    def get(cls, register_date=None):
+    def get(cls, start_date, end_date):
         session = DBSession()
         query = session.query(cls)
-        #query = query.filter(cls.register_date > register_date)
+        query = query.filter(cls.register_date > start_date)
+        query = query.filter(cls.register_date < end_date)
         query = query.order_by(asc(cls.register_date))
 
         response = query.all()
