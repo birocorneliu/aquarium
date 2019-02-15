@@ -29,16 +29,13 @@ const drawPlot = async function() {
   const trace1 = {
     x: [],
     y: [],
-    mode: "lines+markers",
+    mode: "lines",
     type: "scatter",
     line: {shape: 'spline'},
     name: "temperature"
   }
 
-  data.slice(-1 - 6 * 24 * 7).forEach(({temperature, register_date}, i) => {
-    if (i % (6 * 3)) {
-      return;
-    }
+  data.forEach(({temperature, register_date}, i) => {
     trace1.x.push(register_date);
     trace1.y.push(temperature);
   })
@@ -107,7 +104,7 @@ const initialize = function() {
   createCommands();
   drawPlot();
 
-  setInterval(createCommands, 30 * 1000);
+  setInterval(createCommands, 10 * 1000);
 };
 
 initialize();
