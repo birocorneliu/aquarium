@@ -17,6 +17,7 @@ sudo systemctl start ssh
 ```
 passwd
 
+sudo mkdir -p ~/.ssh
 sudo echo $'Host *\nServerAliveInterval 240' > ~/.ssh/config
 sudo chmod 600 ~/.ssh/config
 sudo service ssh restart
