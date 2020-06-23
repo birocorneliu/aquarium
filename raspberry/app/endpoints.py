@@ -106,4 +106,7 @@ def set_procedure(procedure):
     TempCommands.add_entry(statuses, expire_delta)
     IO.set_pins(statuses)
 
+    if procedure == "feed":
+        IO.feed()
+
     return procedure

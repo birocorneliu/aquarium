@@ -9,6 +9,8 @@ class IO_BASE(object):
     PINS = config.pins
     NI_PINS = config.NI_pins
     RESOURCES = config.resources
+    MOTOR_PINS = config.MOTOR_PINS
+    MOTOR_PINS_BACK = config.MOTOR_PINS_BACK
 
 
     #----------------------------------------------------------------------------------------------
@@ -67,6 +69,34 @@ class IO_BASE(object):
     def set_pins(self, statuses):
         for pin_id, status in statuses.iteritems():
             self.open(pin_id) if status else self.close(pin_id)
+    
+    
+    #----------------------------------------------------------------------------------------------
+    def feed(self):
+        def reset_pins():
+            for pin in self.MOTOR_PINS:
+                self.GPIO.setup(pin, self.GPIO.OUT)
+                self.GPIO.output(pin, 0)
+
+        def invarte(direction, cycles): 
+            seq = [
+                [1, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1],
+            ]
+            for _ in range(cycles):
+                for step in range(4):
+                    for pin in range(4):
+                        self.GPIO.output(direction[pin], seq[step][pin])
+                        time.sleep(0.001)
+
+        reset_pins()
+        for i in range(10):
+            invarte(self.MOTOR_PINS_BACK, 64)
+            invarte(self.MOTOR_PINS, 128 + 64)
+        reset_pins()
+
 
 
 IO = IO_BASE(GPIO)
