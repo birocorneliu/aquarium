@@ -61,6 +61,7 @@ MOTOR_PINS_BACK = list(MOTOR_PINS)
 MOTOR_PINS_BACK.reverse()
 
 
+lumina = ["led_albastru", "led_daylight"]
 pins = {
     "led_albastru":  19,
     "led_daylight": 16,

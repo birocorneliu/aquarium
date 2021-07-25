@@ -33,6 +33,11 @@ def get_statuses(with_db=True):
     if with_db and obj is not None:
         status.update(obj.statuses)
 
+    status["vacation_mode"] = status.get("vacation_mode", False)
+    if status["vacation_mode"]:
+        for light in config.lumina:
+            status[light] = False
+
     return status
 
 

@@ -1,6 +1,6 @@
 import json
 import requests
-from flask import request
+from flask import request, render_template
 
 from app.io import IO
 from app.temperature import read_temp
@@ -10,7 +10,11 @@ from lib import config
 
 #-------------------------------------------------------------------------------------------------
 def home():
-    return "<h1 style='color:blue'>Hello There!</h1>"
+    pins = get_statuses()
+    pins_order = pins.keys()
+    pins_order.sort(key = lambda s: len(s))
+    
+    return render_template("commands.jinja2", pins=pins, pins_order=pins_order)
 
 
 #-------------------------------------------------------------------------------------------------
