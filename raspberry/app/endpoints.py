@@ -4,9 +4,10 @@ from flask import request, render_template
 
 from app.io import IO
 from app.temperature import read_temp
-from lib.helpers import get_statuses, send_temperature, send_alert
-from lib.db import TempCommands
 from lib import config
+from lib.db import TempCommands, Thermostats
+from lib.helpers import get_statuses, send_temperature, send_alert
+from lib.salus_it_600 import SalusIT600
 
 #-------------------------------------------------------------------------------------------------
 def home():
@@ -114,3 +115,15 @@ def set_procedure(procedure):
         IO.feed()
 
     return procedure
+
+
+#-------------------------------------------------------------------------------------------------
+def thermostats():
+    return json.dumps(Thermostats.get())
+
+
+#-------------------------------------------------------------------------------------------------
+def set_thermostats(email, paswd):
+    data = SalusIT600(email, paswd).statuses
+    Thermostats.add_entry(data)
+    return json.dumps(data)

@@ -115,6 +115,66 @@ class TempCommands(Base):
 
 
 
+###################################################################################################
+class Thermostats(Base):
+    __tablename__ = "thermostatss"
+    COLUMNS = [
+        "paul_room_set_temp", "paul_room_temp", 
+        "my_room_set_temp", "my_room_temp", 
+        "living_room_set_temp", "living_room_temp", 
+        "register_date"
+    ]
+
+    id = Column(Integer, primary_key=True)
+    paul_room_set_temp = Column(Float, nullable=False)
+    paul_room_temp = Column(Float, nullable=False)
+    my_room_set_temp = Column(Float, nullable=False)
+    my_room_temp = Column(Float, nullable=False)
+    living_room_set_temp = Column(Float, nullable=False)
+    living_room_temp = Column(Float, nullable=False)
+    register_date = Column(DateTime, default=datetime.now)
+
+
+    @classmethod
+    #----------------------------------------------------------------------------------------------
+    def add_entry(cls, data):
+        obj = cls()
+        for key, value in data.items():
+            setattr(obj, key, value)
+
+        session = DBSession()
+        session.add(obj)
+        session.commit()
+        session.close()
+
+        return obj
+
+
+    @classmethod
+    #----------------------------------------------------------------------------------------------
+    def get(cls, register_date=None):
+        session = DBSession()
+        query = session.query(cls)
+        #query = query.filter(cls.register_date > register_date)
+        query = query.order_by(asc(cls.register_date))
+
+        response = query.all()
+        session.close()
+
+        return [cls.obj_to_list(obj) for obj in response]
+
+
+    @classmethod
+    #----------------------------------------------------------------------------------------------
+    def obj_to_list(cls, obj):
+        output = []
+        for col in cls.COLUMNS:
+	    value = getattr(obj, col)
+            output.append(str(value)[:16] if col == "register_date" else value)
+	return output
+        
+
+
 engine = create_engine('sqlite:///lib/aquarium.db')
 Base.metadata.create_all(engine)
 Base.metadata.bind = engine
